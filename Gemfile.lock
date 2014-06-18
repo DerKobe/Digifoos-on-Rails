@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/plataformatec/simple_form.git
-  revision: 122ac3b252f6d953c5e4e4856b95a63e6fd83f5a
+  revision: dd95122aeec173273982c5d13f16742564364672
   branch: master
   specs:
     simple_form (3.1.0.rc1)
@@ -121,7 +121,7 @@ GEM
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
     json (1.8.1)
-    kaminari (0.16.0)
+    kaminari (0.16.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
     kaminari-bootstrap (3.0.1)
@@ -135,7 +135,7 @@ GEM
       actionpack (>= 3.0.0)
     mime-types (1.25.1)
     mini_portile (0.6.0)
-    minitest (5.3.4)
+    minitest (5.3.5)
     multi_json (1.10.1)
     multi_test (0.1.1)
     nokogiri (1.6.2.1)
@@ -178,9 +178,9 @@ GEM
     responders (1.1.0)
       railties (>= 3.2, < 5)
     rolify (3.4.0)
-    rspec-core (3.0.0)
+    rspec-core (3.0.1)
       rspec-support (~> 3.0.0)
-    rspec-expectations (3.0.0)
+    rspec-expectations (3.0.1)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.0.0)
     rspec-mocks (3.0.1)
@@ -226,7 +226,7 @@ GEM
       polyglot (>= 0.3.1)
     tzinfo (1.2.1)
       thread_safe (~> 0.1)
-    uglifier (2.5.0)
+    uglifier (2.5.1)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
     unicorn (4.8.3)
