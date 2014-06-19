@@ -1,4 +1,4 @@
-Zangetsu
+Digifoos
 ========
 
 An opinionated Rails starter application that has everything you need to hit the ground running on your next project.
