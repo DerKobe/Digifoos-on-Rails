@@ -1,9 +1,10 @@
-Digifoos [![Build Status](https://travis-ci.org/DerKobe/Digifoos-on-Rails.svg?branch=master)](https://travis-ci.org/DerKobe/Digifoos-on-Rails)
+Digifoos
 ========
 
 An opinionated Rails starter application that has everything you need to hit the ground running on your next project.
 
 [![Dependency Status](https://gemnasium.com/lankz/zangetsu.svg)](https://gemnasium.com/lankz/zangetsu)
+[![Build Status](https://travis-ci.org/DerKobe/Digifoos-on-Rails.svg?branch=master)](https://travis-ci.org/DerKobe/Digifoos-on-Rails)
 
 Goodies
 -------
