@@ -3,7 +3,7 @@ Digifoos
 
 An opinionated Rails starter application that has everything you need to hit the ground running on your next project.
 
-[![Dependency Status](https://gemnasium.com/lankz/zangetsu.svg)](https://gemnasium.com/lankz/zangetsu)
+[![Dependency Status](https://gemnasium.com/DerKobe/Digifoos-on-Rails.svg)](https://gemnasium.com/DerKobe/Digifoos-on-Rails)
 [![Build Status](https://travis-ci.org/DerKobe/Digifoos-on-Rails.svg?branch=master)](https://travis-ci.org/DerKobe/Digifoos-on-Rails)
 
 Goodies
