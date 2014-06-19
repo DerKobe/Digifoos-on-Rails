@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Zangetsu::Application.load_tasks
+Digifoos::Application.load_tasks

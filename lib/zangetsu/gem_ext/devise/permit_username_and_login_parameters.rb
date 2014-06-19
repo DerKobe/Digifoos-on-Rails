@@ -1,4 +1,4 @@
-module Zangetsu
+module Digifoos
   module Devise
     module PermitUsernameAndLoginParameters
       # extends ................................................................
@@ -31,4 +31,4 @@ module Zangetsu
 end
 
 require Rails.root.join(*%w(config initializers devise))
-DeviseController.send :include, Zangetsu::Devise::PermitUsernameAndLoginParameters
+DeviseController.send :include, Digifoos::Devise::PermitUsernameAndLoginParameters

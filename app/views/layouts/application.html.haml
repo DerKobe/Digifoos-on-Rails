@@ -1,7 +1,7 @@
 !!! 5
 %html
   %head
-    = display_meta_tags :site => 'Zangetsu', :reverse => true, :separator => '-'
+    = display_meta_tags :site => 'Digifoos', :reverse => true, :separator => '-'
     = stylesheet_link_tag 'application', :media => 'all'
     = javascript_include_tag 'application'
     = csrf_meta_tag
@@ -15,11 +15,11 @@
             %span.icon-bar
             %span.icon-bar
 
-          = link_to 'Zangetsu', root_path, :class => 'navbar-brand'
+          = link_to 'Digifoos', root_path, :class => 'navbar-brand'
 
         .collapse.navbar-collapse{ :id => 'bs-example-navbar-collapse-1' }
+          / primary navigation
           %ul.nav.navbar-nav
-            / primary navigation
 
           %ul.nav.navbar-nav.navbar-right
             - if user_signed_in?
@@ -48,6 +48,10 @@
                 = link_to new_user_session_path do
                   = fa_icon 'sign-out'
                   Sign in
+              %li
+                = link_to new_user_registration_path do
+                  = fa_icon 'plus-circle'
+                  Sign up
 
     .container
       = yield :breadcrumbs

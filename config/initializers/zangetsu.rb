@@ -1,6 +1,6 @@
 require "zangetsu/gem_ext/devise/permit_username_and_login_parameters"
 
-Zangetsu::Application.config.generators do |g|
+Digifoos::Application.config.generators do |g|
   g.fixture_replacement :factory_girl, :dir => 'spec/factories'
 
   # don't generate quite so much cruft when scaffolding
