@@ -1,4 +1,4 @@
-Digifoos
+Digifoos [![Build Status](https://travis-ci.org/DerKobe/Digifoos-on-Rails.svg?branch=master)](https://travis-ci.org/DerKobe/Digifoos-on-Rails)
 ========
 
 An opinionated Rails starter application that has everything you need to hit the ground running on your next project.
