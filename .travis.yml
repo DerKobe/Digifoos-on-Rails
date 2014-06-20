@@ -6,7 +6,7 @@ rvm:
 script:
   - RAILS_ENV=test bundle exec rake db:migrate --trace
   - bundle exec rake db:test:prepare
-  - bundle exec rake
+  - CODECLIMATE_REPO_TOKEN=ab1d5e4b664525c4bedee2008cef157c7e71a7fbe1c28cc529ba71aa4eb56fdb bundle exec rake
 
 services: postgresql
 
