@@ -3,7 +3,7 @@ development:
   encoding: unicode
   database: digifoos_dev
   pool: 5
-  username: postgres
+  username: kobe
   password:
 
 test:
@@ -11,13 +11,5 @@ test:
   encoding: unicode
   database: digifoos_test
   pool: 5
-  username: postgres
-  password:
-
-production:
-  adapter: postgresql
-  encoding: unicode
-  database: digifoos_prod
-  pool: 5
-  username: postgres
+  username: kobe
   password:
