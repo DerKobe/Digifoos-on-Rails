@@ -2,5 +2,7 @@
 
 FactoryGirl.define do
   factory :session do
+    sequence(:name) { |n| "Session #{n}" }
+    association :user, factory: :user
   end
 end
