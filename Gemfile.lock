@@ -1,4 +1,12 @@
 GIT
+  remote: git://github.com/DerKobe/goldiloader.git
+  revision: 9d5aed70ccc86032e63a473149018c97005ddedd
+  specs:
+    goldiloader (0.0.5)
+      activerecord (>= 3.2, <= 4.1.1)
+      activesupport (>= 3.2, <= 4.1.1)
+
+GIT
   remote: git://github.com/plataformatec/simple_form.git
   revision: dd95122aeec173273982c5d13f16742564364672
   branch: master
@@ -254,6 +262,7 @@ DEPENDENCIES
   factory_girl_rails
   font-awesome-rails (~> 4.1.0)
   foreman
+  goldiloader!
   gravatar_image_tag (~> 1.2.0)
   haml-rails
   jbuilder (~> 2.1.1)

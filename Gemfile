@@ -27,6 +27,7 @@ end
 # Use Capistrano for deployment
 # gem 'capistrano', group: :development
 
+gem 'goldiloader', github: 'DerKobe/goldiloader'
 gem 'puma'
 gem 'pry-rails'
 gem 'better_errors'
