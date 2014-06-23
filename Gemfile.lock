@@ -98,7 +98,7 @@ GEM
       railties (>= 3.0.0)
     font-awesome-rails (4.1.0.0)
       railties (>= 3.2, < 5.0)
-    foreman (0.71.0)
+    foreman (0.74.0)
       dotenv (~> 0.11.1)
       thor (~> 0.19.1)
     gherkin (2.12.2)
