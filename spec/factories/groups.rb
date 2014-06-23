@@ -1,8 +1,8 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-  factory :session do
-    sequence(:name) { |n| "Session #{n}" }
+  factory :group do
+    sequence(:name) { |n| "Group #{n}" }
     association :user, factory: :user
   end
 end

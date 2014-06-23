@@ -7,11 +7,11 @@ class Game < ActiveRecord::Base
   belongs_to :player2, class_name: 'Player'
   belongs_to :player3, class_name: 'Player'
   belongs_to :player4, class_name: 'Player'
-  belongs_to :session
+  belongs_to :group
 
   # scopes .....................................................................
   # validations ................................................................
-  validates_presence_of :player1, :player2, :player3, :player4, :session
+  validates_presence_of :player1, :player2, :player3, :player4, :group
 
   # callbacks ..................................................................
   # additional config ..........................................................

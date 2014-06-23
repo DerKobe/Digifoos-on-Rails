@@ -3,6 +3,6 @@
 FactoryGirl.define do
   factory :player do
     sequence(:name) { |n| "Player #{n}" }
-    association :session, factory: :session
+    association :group, factory: :group
   end
 end

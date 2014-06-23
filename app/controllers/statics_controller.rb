@@ -14,5 +14,6 @@ class StaticsController < ApplicationController
   # controller actions .........................................................
 
   def home
+    redirect_to :groups if user_signed_in?
   end
 end

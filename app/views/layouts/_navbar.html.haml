@@ -7,14 +7,12 @@
         %span.icon-bar
         %span.icon-bar
 
-      = link_to 'Digifoos', root_path, :class => 'navbar-brand'
+      - if current_group.present?
+        = link_to current_group.name, group_path(current_group), :class => 'navbar-brand'
+      - else
+        = link_to 'Digifoos', root_path, :class => 'navbar-brand'
 
-    .collapse.navbar-collapse{ :id => 'bs-example-navbar-collapse-1' }
-      %ul.nav.navbar-nav
-        - begin
-          = render "#{params[:controller]}/navbar"
-        - rescue ActionView::MissingTemplate
-          - # skip navbar
+    .collapse.navbar-collapse
 
       %ul.nav.navbar-nav.navbar-right
         - if user_signed_in?

@@ -12,9 +12,10 @@ class Ability
   def initialize(user)
     user ||= User.new # guest user (not logged in)
 
-    can :manage, :all if user.admin?
+    alias_action :create, :read, :update, :destroy, :to => :crud
 
-    can :read, Session, :user_id => user.id
+    can :crud, Group,  user_id: user.id
+    can :crud, Player, user: user # through association
   end
 
   # protected instance methods .................................................

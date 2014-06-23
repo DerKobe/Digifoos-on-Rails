@@ -2,7 +2,7 @@
   .page-header
     %h2 Sign in
 
-  = simple_form_for(resource, :as => resource_name, :url => user_session_path, :wrapper => :horizontal_form, :wrapper_mappings => { :boolean => :horizontal_boolean }, :html => { :class => 'form-horizontal', :role => 'form' }) do |f|
+  = simple_form_for(resource, :as => resource_name, :url => session_path(resource_name), :wrapper => :horizontal_form, :wrapper_mappings => { :boolean => :horizontal_boolean }, :html => { :class => 'form-horizontal', :role => 'form' }) do |f|
     = f.input :login, :required => false, :autofocus => :true
     = f.input :password, :required => false
     = f.input :remember_me, :as => :boolean if devise_mapping.rememberable?
@@ -10,4 +10,4 @@
     .form-group
       .col-sm-offset-3.col-sm-9
         = f.button :submit, 'Sign in', :class => 'btn-primary'
-        = link_to "Forgot your password?", new_password_path(resource_name), :class => 'btn'
+        = link_to 'Forgot your password?', new_password_path(resource_name), class: 'btn btn-link'

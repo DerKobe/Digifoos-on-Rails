@@ -15,7 +15,9 @@
 @import "bootstrap";
 @import "font-awesome";
 
-body { padding-top: $navbar-height + $grid-gutter-width; }
+body {
+  padding-top: $navbar-height + $grid-gutter-width;
+}
 
 .navbar .avatar {
   @include border-top-radius(2px);

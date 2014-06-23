@@ -1,0 +1,11 @@
+- set_meta_tags title: 'Groups'
+
+- content_for :breadcrumbs do
+  %ol.breadcrumb
+    %li
+      = link_to fa_icon('home'), root_path
+    %li.active
+      = link_to 'Groups', groups_path
+
+- @groups.each do |group|
+  %h3= link_to group.name, group_path(group)

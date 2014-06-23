@@ -1,7 +1,10 @@
 - content_for :breadcrumbs do
   %ol.breadcrumb
-    %li= link_to 'Home', root_path
-    %li.active= "Edit #{resource_class.model_name.human}"
+    %li
+      = link_to root_path do
+        = fa_icon 'home'
+    %li.active
+      = "Edit #{resource_class.model_name.human}"
 
 .container
   .page-header

@@ -6,6 +6,6 @@ FactoryGirl.define do
     association :player2, factory: :player
     association :player3, factory: :player
     association :player4, factory: :player
-    association :session, factory: :session
+    association :group,   factory: :group
   end
 end

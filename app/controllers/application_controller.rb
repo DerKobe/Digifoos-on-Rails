@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
   # includes ...................................................................
   # constants ..................................................................
   # filters ....................................................................
+  before_filter :current_group
+
   # helpers ....................................................................
   # scopes .....................................................................
   # additional config ..........................................................
@@ -29,5 +31,15 @@ class ApplicationController < ActionController::Base
   def not_found
     set_meta_tags :title => 'Not found'
     render :not_found, :status => :not_found
+  end
+
+  private
+
+  def current_group
+    @current_group ||= begin
+      if params[:group_id].present? || (params[:controller] == 'groups' && params[:id].present?)
+        Group.find params[:group_id] || params[:id]
+      end
+    end
   end
 end

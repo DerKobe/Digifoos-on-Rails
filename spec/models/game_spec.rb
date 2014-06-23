@@ -23,8 +23,8 @@ RSpec.describe Game, :type => :model do
       expect(FactoryGirl.build(:game, player4: nil)).to_not be_valid
     end
 
-    it 'session' do
-      expect(FactoryGirl.build(:game, session: nil)).to_not be_valid
+    it 'group' do
+      expect(FactoryGirl.build(:game, group: nil)).to_not be_valid
     end
   end
 
