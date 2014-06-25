@@ -14,8 +14,13 @@ class Ability
 
     alias_action :create, :read, :update, :destroy, :to => :crud
 
-    can :crud, Group,  user_id: user.id
+    can :read, Group
+    can :crud, Group,  user: user
+
+    can :read, Player
     can :crud, Player, user: user # through association
+
+    can :update, Game, user: user # through association
   end
 
   # protected instance methods .................................................

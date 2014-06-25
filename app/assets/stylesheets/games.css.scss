@@ -1,3 +1,51 @@
-#games table td {
-  text-align: center;
+.games {
+  .all-games table td {
+    text-align: center;
+  }
+
+  .team1 {
+    text-align: right;
+  }
+
+  .team2 {
+    text-align: left;
+  }
+
+  .current-game {
+    border-radius: 6px;
+    text-align: center;
+    padding: 20px 0;
+    background-color: #eee;
+    margin-bottom: 10px;
+
+    .goals {
+      font-size: 100px;
+      font-weight: bold;
+      display: inline-block;
+    }
+
+    .team a {
+      display: block;
+      font-size: 18px;
+    }
+
+    .vs .label {
+      position: relative;
+      top: 15px;
+    }
+  }
+
+  .current-game-control {
+    padding: 20px 0;
+    background-color: #eee;
+    border-radius: 6px;
+    margin-bottom: 10px;
+  }
+
+  .all-games {
+    .badge.loser,
+    .badge.winner {
+      font-size: 16px;
+    }
+  }
 }

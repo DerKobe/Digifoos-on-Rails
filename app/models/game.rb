@@ -9,6 +9,8 @@ class Game < ActiveRecord::Base
   belongs_to :player4, class_name: 'Player'
   belongs_to :group
 
+  has_one :user, through: :group
+
   # scopes .....................................................................
   # validations ................................................................
   validates_presence_of :player1, :player2, :player3, :player4, :group

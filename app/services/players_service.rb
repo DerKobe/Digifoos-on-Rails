@@ -3,7 +3,7 @@ class PlayersService
 
     QUERY_POINTS = <<-SQL
                SELECT
-                 (SUM(points_team1) + SUM(points_team1)) AS points
+                 (SUM(points_team1) + SUM(points_team2)) AS points
                FROM
                  games
                WHERE
@@ -28,8 +28,8 @@ class PlayersService
 
     def get_players_for(group)
       group.players.map do |player|
-        player.points = ActiveRecord::Base.connection.select_all(ActiveRecord::Base.send(:sanitize_sql_array,[QUERY_POINTS, group.id, player.id, player.id, player.id, player.id])).first['points'].to_i
-        result = ActiveRecord::Base.connection.select_all(ActiveRecord::Base.send(:sanitize_sql_array,[QUERY_GOALS, player.id, player.id, player.id, player.id, group.id, player.id, player.id, player.id, player.id])).first
+        player.points = ActiveRecord::Base.connection.select_all(ActiveRecord::Base.send(:sanitize_sql_array,[trimmer(QUERY_POINTS), group.id, player.id, player.id, player.id, player.id])).first['points'].to_i
+        result = ActiveRecord::Base.connection.select_all(ActiveRecord::Base.send(:sanitize_sql_array,[trimmer(QUERY_GOALS), player.id, player.id, player.id, player.id, group.id, player.id, player.id, player.id, player.id])).first
         player.goals_made = result['goals_made'].to_i
         player.goals_against = result['goals_against'].to_i
         player
@@ -38,6 +38,12 @@ class PlayersService
         players << player
         players
       end
+    end
+
+    private
+
+    def trimmer(string)
+      string.gsub("\n",' ').gsub(/\s\s+/,' ').strip()
     end
 
   end

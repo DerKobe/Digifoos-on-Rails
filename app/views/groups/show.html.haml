@@ -1,11 +1,31 @@
 - set_meta_tags title: current_group.name
 
 - content_for :breadcrumbs do
-  %ol.breadcrumb
-    %li
-      = link_to fa_icon('home'), root_path
-    %li.active
-      = current_group.name
+  #header.row
+    %div{ class: can?(:update, @current_game) ? 'col-md-7' : 'col-md-12' }
+      %ol.breadcrumb
+        %li
+          = link_to fa_icon('home'), root_path
+        %li.active
+          = current_group.name
+    - if can? :update, @current_game
+      .col-md-5
+        .actions.pull-right
+          %a.btn.btn-default(href="#")
+            = fa_icon 'cog'
+            &nbsp;
+            Manage Players
+
+          - if false
+            %a.btn.btn-danger(href="#")
+              = fa_icon 'stop'
+              &nbsp;
+              Game Over
+          - else
+            %a.btn.btn-primary(href="#")
+              = fa_icon 'play'
+              &nbsp;
+              Start New Game
 
 .row
   .col-md-7
