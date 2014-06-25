@@ -8,33 +8,8 @@
       = current_group.name
 
 .row
-  #games.col-md-7
-    - if @games.any?
-      %table.table.table-striped
-        %tbody
-          - @games.each do |game|
-            %tr
-              %td= player_link game.player1_id
-              %td= player_link game.player2_id
-              %td
-                .badge= game.score_team1.to_i
-                = ':'
-                .badge= game.score_team2.to_i
-              %td= player_link game.player3_id
-              %td= player_link game.player4_id
+  .col-md-7
+    = render file: 'games/index'
 
-      = paginate @games
-
-    - else
-      .alert.alert-warning
-        No games found.
-
-  #players.col-md-5
-    - if @players.any?
-      .list-group
-        - @players.each do |player|
-          = link_to player.name, group_player_path(current_group, player), class: 'list-group-item'
-
-    - else
-      .alert.alert-warning
-        No players found.
+  .col-md-5
+    = render file: 'players/index'

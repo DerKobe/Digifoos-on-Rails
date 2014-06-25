@@ -1,0 +1,21 @@
+.players
+  - if @players.any?
+    .list-group
+      - @players.each do |player|
+        = link_to group_player_path(current_group, player), class: 'list-group-item' do
+          .label.label-primary.pull-left
+            %span.number= player.position
+
+          = player.name
+
+          .label.label-warning.pull-right
+            %span.text Goals
+            %span.number= player.goals_made
+
+          .label.label-success.pull-right
+            %span.text Points
+            %span.number= player.points
+
+  - else
+    .alert.alert-warning
+      No players found.

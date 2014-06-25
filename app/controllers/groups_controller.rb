@@ -9,7 +9,7 @@ class GroupsController < ApplicationController
     @group = current_group
     authorize! :read, @group
 
-    @players = @group.players.to_a
+    @players = PlayersService.get_players_for(@group)
     @games   = @group.games.order('created_at DESC').page(params[:page].to_i)
   end
 

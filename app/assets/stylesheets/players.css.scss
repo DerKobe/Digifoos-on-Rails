@@ -1,0 +1,27 @@
+.players {
+  .label {
+    position: relative;
+    top: -2px;
+    
+    &.pull-left {
+      margin-right: 10px;
+      font-weight: normal;
+    }
+
+    &.pull-right {
+      margin-left: 10px;
+      font-weight: normal;
+    }
+
+    span {
+      &.text {
+        position: relative;
+        top: -2px;
+      }
+
+      &.number {
+        font-size: 20px;
+      }
+    }
+  }
+}

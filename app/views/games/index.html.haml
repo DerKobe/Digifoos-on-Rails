@@ -1,0 +1,20 @@
+.games
+  - if @games.any?
+    %table.table.table-striped
+      %tbody
+        - @games.each do |game|
+          %tr
+            %td= player_link game.player1_id
+            %td= player_link game.player2_id
+            %td
+              .badge(style="font-size: 16px")= game.goals_team1.to_i
+              = ':'
+              .badge(style="font-size: 16px")= game.goals_team2.to_i
+            %td= player_link game.player3_id
+            %td= player_link game.player4_id
+
+    = paginate @games
+
+  - else
+    .alert.alert-warning
+      No games found.

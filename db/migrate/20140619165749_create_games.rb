@@ -6,8 +6,11 @@ class CreateGames < ActiveRecord::Migration
       t.integer :player3_id
       t.integer :player4_id
 
-      t.integer :score_team1, defaul: 0
-      t.integer :score_team2, defaul: 0
+      t.integer :goals_team1, defaul: 0
+      t.integer :goals_team2, defaul: 0
+
+      t.integer :points_team1, defaul: 0
+      t.integer :points_team2, defaul: 0
 
       t.belongs_to :group
 
