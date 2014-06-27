@@ -43,9 +43,17 @@
   }
 
   .all-games {
-    .badge.loser,
-    .badge.winner {
+    .badge {
       font-size: 16px;
+    }
+
+    .winner i {
+      color: #ffe237;
+      text-shadow: 1px 1px 1px #666;
+    }
+
+    .loser i {
+      opacity: 0;
     }
   }
 }

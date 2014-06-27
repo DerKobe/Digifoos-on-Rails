@@ -10,7 +10,7 @@ module GroupsHelper
     link_to player.name, group_player_path(current_group, player)
   end
 
-  def goals_badge_color(game, team)
+  def winner_loser_class(game, team)
     winner_class = 'winner'
     loser_class  = 'loser'
 

@@ -1,7 +1,7 @@
 ruby '2.1.2'
 source 'https://rubygems.org'
 
-gem 'rails', '4.1.1'
+gem 'rails', '4.1.2'
 gem 'pg'
 
 gem 'sass-rails', '~> 4.0.0'
@@ -27,7 +27,7 @@ end
 # Use Capistrano for deployment
 # gem 'capistrano', group: :development
 
-gem 'goldiloader', github: 'DerKobe/goldiloader'
+gem 'goldiloader', github: 'salsify/goldiloader'
 gem 'puma'
 gem 'pry-rails'
 gem 'better_errors'
