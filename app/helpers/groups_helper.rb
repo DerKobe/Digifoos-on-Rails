@@ -5,20 +5,14 @@ module GroupsHelper
   # additional config ..........................................................
   # class methods ..............................................................
   # helper methods .............................................................
-  def player_link(player_id)
-    player = @players.select{|p| p.id == player_id }.first
+  def player_link(player)
     link_to player.name, group_player_path(current_group, player)
   end
 
-  def winner_loser_class(game, team)
+  def winner_loser_class(team)
     winner_class = 'winner'
     loser_class  = 'loser'
-
-    if game.goals_team1.to_i > game.goals_team2.to_i
-      team == 1 ? winner_class : loser_class
-    else
-      team == 1 ? loser_class : winner_class
-    end
+    team.points > 0 ? winner_class : loser_class
   end
 
   # protected instance methods .................................................

@@ -22,7 +22,5 @@ module Digifoos
 
     # because including all helpers, all the time is a bad idea
     config.action_controller.include_all_helpers = false
-
-    config.autoload_paths += %W(#{config.root}/app/services)
   end
 end

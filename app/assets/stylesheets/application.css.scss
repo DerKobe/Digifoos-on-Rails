@@ -29,3 +29,9 @@ body {
 #header .actions {
   margin-bottom: 15px;
 }
+
+.pagination > li.disabled {
+  > a, > span {
+    padding: 6px 4px;
+  }
+}

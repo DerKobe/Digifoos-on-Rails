@@ -1,4 +1,11 @@
 .players {
+  .trophy {
+    i { text-shadow: 0px 1px 1px #666; }
+    &.position-0 i { color: #ffed2c; }
+    &.position-1 i { color: #dbdbdb; }
+    &.position-2 i { color: #ffa43f; }
+  }
+
   .label {
     position: relative;
     top: -2px;

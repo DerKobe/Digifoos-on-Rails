@@ -1,16 +1,19 @@
 .players
   - if @players.any?
     .list-group
-      - @players.each do |player|
+      - @players.each_with_index do |player, position|
         = link_to group_player_path(current_group, player), class: 'list-group-item' do
           .label.label-primary.pull-left
-            %span.number= player.position
+            %span.number= position + 1
+
+          - if position < 3
+            %span.trophy{ class: "position-#{position}" }= fa_icon 'trophy'
 
           = player.name
 
           .label.label-warning.pull-right
             %span.text Goals
-            %span.number= player.goals_made
+            %span.number= player.goals
 
           .label.label-success.pull-right
             %span.text Points

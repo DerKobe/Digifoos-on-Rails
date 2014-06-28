@@ -11,24 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140619165958) do
+ActiveRecord::Schema.define(version: 20140627150938) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "games", force: true do |t|
-    t.integer  "player1_id"
-    t.integer  "player2_id"
-    t.integer  "player3_id"
-    t.integer  "player4_id"
-    t.integer  "goals_team1"
-    t.integer  "goals_team2"
-    t.integer  "points_team1"
-    t.integer  "points_team2"
+    t.integer  "status",     default: 0, null: false
     t.integer  "group_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "games", ["group_id"], name: "index_games_on_group_id", using: :btree
+  add_index "games", ["status"], name: "index_games_on_status", using: :btree
 
   create_table "groups", force: true do |t|
     t.string   "name"
@@ -37,10 +33,22 @@ ActiveRecord::Schema.define(version: 20140619165958) do
     t.datetime "updated_at"
   end
 
+  add_index "groups", ["user_id"], name: "index_groups_on_user_id", using: :btree
+
   create_table "players", force: true do |t|
     t.string  "name"
-    t.integer "group_id"
+    t.integer "group_id", null: false
   end
+
+  add_index "players", ["group_id"], name: "index_players_on_group_id", using: :btree
+
+  create_table "players_teams", force: true do |t|
+    t.integer "player_id", null: false
+    t.integer "team_id",   null: false
+  end
+
+  add_index "players_teams", ["player_id"], name: "index_players_teams_on_player_id", using: :btree
+  add_index "players_teams", ["team_id"], name: "index_players_teams_on_team_id", using: :btree
 
   create_table "roles", force: true do |t|
     t.string   "name"
@@ -52,6 +60,14 @@ ActiveRecord::Schema.define(version: 20140619165958) do
 
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
   add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
+
+  create_table "teams", force: true do |t|
+    t.integer "game_id",             null: false
+    t.integer "goals",   default: 0, null: false
+    t.integer "points",  default: 0, null: false
+  end
+
+  add_index "teams", ["game_id"], name: "index_teams_on_game_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "username",               default: "", null: false

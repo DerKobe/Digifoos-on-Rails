@@ -1,49 +1,31 @@
 class PlayersService
+  using SqlTrimmer
+
   class << self
-
-    QUERY_POINTS = <<-SQL
+    QUERY = <<-SQL
                SELECT
-                 (SUM(points_team1) + SUM(points_team2)) AS points
+                 players.*,
+                 COALESCE(SUM(teams.goals),  0) AS goals,
+                 COALESCE(SUM(teams.points), 0) AS points
                FROM
-                 games
+                 players
+                 LEFT JOIN players_teams ON players_teams.player_id = players.id
+                 LEFT JOIN teams         ON teams.id = players_teams.team_id
+                 LEFT JOIN games         ON teams.game_id = games.id
                WHERE
-                 group_id = ?
-                 AND
-                 (
-                   (player1_id = ? OR player2_id = ?) AND points_team1 > points_team2
-                   OR
-                   (player3_id = ? OR player4_id = ?) AND points_team1 < points_team2
-                 )
-    SQL
-
-    QUERY_GOALS = <<-SQL.strip_heredoc
-               SELECT
-                 SUM(CASE WHEN player1_id = ? OR player2_id = ? THEN goals_team1 ELSE goals_team2 END) AS goals_made,
-                 SUM(CASE WHEN player3_id = ? OR player4_id = ? THEN goals_team1 ELSE goals_team2 END) AS goals_against
-               FROM
-                 games
-               WHERE
-                 group_id = ? AND ( player1_id = ? OR player2_id = ? OR player3_id = ? OR player4_id = ? )
+                 players.group_id = ?
+               GROUP BY
+                 players.id
+               ORDER BY
+                 points DESC
     SQL
 
     def get_players_for(group)
-      group.players.map do |player|
-        player.points = ActiveRecord::Base.connection.select_all(ActiveRecord::Base.send(:sanitize_sql_array,[trimmer(QUERY_POINTS), group.id, player.id, player.id, player.id, player.id])).first['points'].to_i
-        result = ActiveRecord::Base.connection.select_all(ActiveRecord::Base.send(:sanitize_sql_array,[trimmer(QUERY_GOALS), player.id, player.id, player.id, player.id, group.id, player.id, player.id, player.id, player.id])).first
-        player.goals_made = result['goals_made'].to_i
-        player.goals_against = result['goals_against'].to_i
+      Player.find_by_sql([QUERY.trim, group.id]).map do |player|
+        player.points = player['points']
+        player.goals = player['goals']
         player
-      end.sort_by{ |p| -p.points }.reduce([]) do |players, player|
-        player.position = players.empty? ? 1 : players.last.position + 1
-        players << player
-        players
       end
-    end
-
-    private
-
-    def trimmer(string)
-      string.gsub("\n",' ').gsub(/\s\s+/,' ').strip()
     end
 
   end

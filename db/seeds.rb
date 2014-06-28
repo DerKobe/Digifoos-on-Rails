@@ -1,70 +1,44 @@
 user = User.create!(
     email:    'philip.claren@googlemail.com',
-    username: 'philip',
-    password: 'Testest12'
+    username: 'Kobe',
+    password: 'philip.claren@googlemail.com'
 )
 
-group1 = user.groups.create! name: 'Super Turnier'
-group2 = user.groups.create! name: 'Clash of the Titans'
-group3 = user.groups.create! name: 'Gerümpel-Turnier'
+group = user.groups.create! name: 'Super Turnier'
 
-r = group1.players.create! name: 'Richard'
-i = group1.players.create! name: 'Irek'
-a = group1.players.create! name: 'Alex'
-c = group1.players.create! name: 'Christoph'
-p = group1.players.create! name: 'Philip'
+players = []
 
-group1.games.create!(
-    player1: r,
-    player2: i,
-    player3: a,
-    player4: c,
-    goals_team1: 5,
-    goals_team2: 3,
-    points_team1: 3,
-    points_team2: 0
-)
+players << group.players.create!(name: 'Richard')
+players << group.players.create!(name: 'Irenäus')
+players << group.players.create!(name: 'Alexander')
+players << group.players.create!(name: 'Christoph')
+players << group.players.create!(name: 'Philip')
 
-group1.games.create!(
-    player1: p,
-    player2: i,
-    player3: a,
-    player4: r,
-    goals_team1: 5,
-    goals_team2: 1,
-    points_team1: 3,
-    points_team2: 0
-)
+100.times do |i|
+  game = group.games.create! status: :finished
 
-group1.games.create!(
-    player1: c,
-    player2: a,
-    player3: i,
-    player4: p,
-    goals_team1: 6,
-    goals_team2: 7,
-    points_team1: 0,
-    points_team2: 3
-)
+  score1 = rand(8)
+  score2 = case score1
+             when 4
+               6
+             when 5
+               rand(4)
+             when 6
+               4
+             when 7
+               5 + rand(1)
+             else
+               5
+           end
 
-group1.games.create!(
-    player1: p,
-    player2: c,
-    player3: a,
-    player4: i,
-    goals_team1: 2,
-    goals_team2: 5,
-    points_team1: 0,
-    points_team2: 3
-)
+  players.shuffle!
+  game.teams.create! players: players[0..1], goals: score1, points: score1 > score2 ? 1 : -1
+  game.teams.create! players: players[2..3], goals: score2, points: score1 < score2 ? 1 : -1
+  if i % 100 == 0
+    print "#{i}:"
+  end
+end
 
-group1.games.create!(
-    player1: i,
-    player2: a,
-    player3: r,
-    player4: c,
-    goals_team1: 6,
-    goals_team2: 4,
-    points_team1: 3,
-    points_team2: 0
-)
+game = group.games.create! status: :running
+game.teams.create! players: players[0..1], goals: 2
+game.teams.create! players: players[2..3], goals: 2

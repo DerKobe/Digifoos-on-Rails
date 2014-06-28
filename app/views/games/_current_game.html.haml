@@ -1,18 +1,18 @@
 .current-game
   .row
     .goals.col-md-12
-      = "#{@current_game.goals_team1} : #{@current_game.goals_team2}"
+      = "#{@current_game.teams.first.goals} : #{@current_game.teams.last.goals}"
 
   .row
     .team1.team.col-xs-5
-      %a(href="#")= @current_game.player1.name
-      %a(href="#")= @current_game.player2.name
+      = player_link @current_game.teams.first.players.first
+      = player_link @current_game.teams.first.players.last
     .vs.col-xs-2
       .label.label-danger
         vs
     .team2.team.col-xs-5
-      %a(href="#")= @current_game.player3.name
-      %a(href="#")= @current_game.player4.name
+      = player_link @current_game.teams.last.players.first
+      = player_link @current_game.teams.last.players.last
 
 - if can? :update, @current_game
   .current-game-control

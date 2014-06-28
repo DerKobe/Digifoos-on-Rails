@@ -9,9 +9,9 @@ class GroupsController < ApplicationController
     @group = current_group
     authorize! :read, @group
 
+    @games        = @group.games.where(status: Game.statuses[:finished]).order('created_at DESC').page(params[:page].to_i)
     @players      = PlayersService.get_players_for(@group)
-    @games        = @group.games.order('created_at DESC').page(params[:page].to_i)
-    @current_game = @group.games.last
+    @current_game = @group.games.where(status: Game.statuses[:running]).first
   end
 
 end
