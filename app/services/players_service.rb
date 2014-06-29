@@ -17,13 +17,13 @@ class PlayersService
                GROUP BY
                  players.id
                ORDER BY
-                 points DESC
+                 points DESC, goals DESC, players.id ASC
     SQL
 
     def get_players_for(group)
       Player.find_by_sql([QUERY.trim, group.id]).map do |player|
         player.points = player['points']
-        player.goals = player['goals']
+        player.goals  = player['goals']
         player
       end
     end

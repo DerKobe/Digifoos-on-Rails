@@ -30,6 +30,7 @@ end
 gem 'goldiloader', github: 'salsify/goldiloader'
 gem 'puma'
 gem 'pry-rails'
+gem 'pry-byebug'
 gem 'better_errors'
 gem 'binding_of_caller'
 gem 'foreman'
@@ -40,7 +41,7 @@ gem 'shoulda-matchers', :group => :test
 gem 'cucumber-rails', :group => :test, :require => false
 gem 'database_cleaner', :group => :test
 gem 'codeclimate-test-reporter', group: :test, require: nil
-gem 'bootstrap-sass', '~> 3.1.1'
+gem 'bootstrap-sass', '~> 3.1'
 gem 'font-awesome-rails', '~> 4.1.0'
 gem 'haml-rails'
 #gem 'responders', '~> 1.1.0'
