@@ -6,7 +6,10 @@ class Game < ActiveRecord::Base
 
   # associations ...............................................................
   belongs_to :group
+
   has_many   :teams
+  has_many   :players, through: :teams
+
   has_one    :user, through: :group
 
   enum status: STATUSES
