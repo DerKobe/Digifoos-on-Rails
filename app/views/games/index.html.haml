@@ -1,6 +1,6 @@
 .games
-  - if @current_game
-    = render 'games/current_game'
+  - if @open_game
+    = render 'games/open_game'
 
   - if @games.any?
     .all-games

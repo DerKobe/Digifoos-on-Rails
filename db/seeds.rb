@@ -34,11 +34,6 @@ players << group.players.create!(name: 'Philip')
   players.shuffle!
   game.teams.create! players: players[0..1], goals: score1, points: score1 > score2 ? 1 : -1
   game.teams.create! players: players[2..3], goals: score2, points: score1 < score2 ? 1 : -1
-  if i % 100 == 0
-    print "#{i}:"
-  end
-end
 
-game = group.games.create! status: :running
-game.teams.create! players: players[0..1], goals: 2
-game.teams.create! players: players[2..3], goals: 2
+  #print "#{i}:" if i % 100 == 0
+end

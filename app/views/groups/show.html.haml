@@ -2,13 +2,13 @@
 
 - content_for :breadcrumbs do
   #header.row
-    %div{ class: can?(:update, @current_game) ? 'col-md-7' : 'col-md-12' }
+    %div{ class: can?(:update, @group) ? 'col-md-7' : 'col-md-12' }
       %ol.breadcrumb
         %li
           = link_to fa_icon('home'), root_path
         %li.active
           = current_group.name
-    - if can? :update, @current_game
+    - if can? :update, @group
       .col-md-5
         .actions.pull-right
           %a.btn.btn-default(href="#")
@@ -22,7 +22,7 @@
               &nbsp;
               Game Over
           - else
-            %a.btn.btn-primary(href="#")
+            %a.btn.btn-primary(data-method="POST"){ href: create_game_group_path(@group) }
               = fa_icon 'play'
               &nbsp;
               Start New Game

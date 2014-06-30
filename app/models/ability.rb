@@ -20,6 +20,7 @@ class Ability
     can :read, Player
     can :crud, Player, user: user # through association
 
+    can :read,   Game
     can :update, Game, user: user # through association
   end
 

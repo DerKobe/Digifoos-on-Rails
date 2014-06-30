@@ -1,0 +1,30 @@
+.created-game
+  .row
+    .col-md-12
+      %h2 Choose who's playing against who
+  .row
+    - 0.tap do |i|
+      .col-xs-3
+        - if teams[i].players.count < 2
+          %ul.available-players{ class: "available-players-#{i}" }
+            - (@group.players.order('name') - teams[i].players).each do |player|
+              %li
+                %a(data-method="POST" data-remote="true"){ href: set_player_group_path(@group, @open_game, teams[i], player) }= player.name
+      .col-xs-3
+        %ul.chosen-players{ class: "chosen-players-#{i}" }
+          - teams[i].players.each do |player|
+            %li
+              %a(data-method="DELETE" data-remote="true"){ href: remove_player_group_path(@group, @open_game, teams[i], player) }= player.name
+
+    - 1.tap do |i|
+      .col-xs-3
+        %ul.chosen-players{ class: "chosen-players-#{i}" }
+          - teams[i].players.each do |player|
+            %li
+              %a(data-method="DELETE" data-remote="true"){ href: remove_player_group_path(@group, @open_game, teams[i], player) }= player.name
+      .col-xs-3
+        - if teams[i].players.count < 2
+          %ul.available-players{ class: "available-players-#{i}" }
+            - (@group.players.order('name') - teams[i].players).each do |player|
+              %li
+                %a(data-method="POST" data-remote="true"){ href: set_player_group_path(@group, @open_game, teams[i], player) }= player.name

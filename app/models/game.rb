@@ -29,7 +29,8 @@ class Game < ActiveRecord::Base
   protected
 
   def only_one_open_game_per_group
-    if !finished? && Game.where('group_id = ? AND games.status IN (?,?) AND games.id != ?', group_id, Game.statuses[:created], Game.statuses[:running], id.to_i).any?
+    open_game = GamesService.open_game_for(group)
+    if !finished? && open_game.present? && open_game.id != id
       errors.add(:status, 'with value :created or :running can only exist once per group')
     end
   end

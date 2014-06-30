@@ -1,4 +1,4 @@
-class PlayersService
+module PlayersService
   using SqlTrimmer
 
   class << self

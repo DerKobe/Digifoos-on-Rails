@@ -1,3 +1,11 @@
+@mixin open-game-box {
+  border-radius: 6px;
+  text-align: center;
+  padding: 20px 0;
+  background-color: #eee;
+  margin-bottom: 10px;
+}
+
 .games {
   .all-games table td {
     text-align: center;
@@ -11,12 +19,8 @@
     text-align: left;
   }
 
-  .current-game {
-    border-radius: 6px;
-    text-align: center;
-    padding: 20px 0;
-    background-color: #eee;
-    margin-bottom: 10px;
+  .running-game {
+    @include open-game-box();
 
     .goals {
       font-size: 100px;
@@ -33,13 +37,31 @@
       position: relative;
       top: 15px;
     }
+
+    .running-game-controls {
+      padding: 20px 0;
+      background-color: #eee;
+      border-radius: 6px;
+      margin-bottom: 10px;
+    }
   }
 
-  .current-game-control {
-    padding: 20px 0;
-    background-color: #eee;
-    border-radius: 6px;
-    margin-bottom: 10px;
+  .created-game {
+    @include open-game-box();
+
+    ul.available-players,
+    ul.chosen-players {
+      list-style: none;
+    }
+
+    ul.available-players-0 {
+      text-align: left;
+    }
+
+    ul.available-players-1 {
+      text-align: right;
+      padding: 0 40px 0 0;
+    }
   }
 
   .all-games {
