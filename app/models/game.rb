@@ -19,6 +19,7 @@ class Game < ActiveRecord::Base
   validates_presence_of :group
   validates_presence_of :status
   validate :only_one_open_game_per_group
+  validate :number_of_teams
 
   # callbacks ..................................................................
   # additional config ..........................................................
@@ -33,6 +34,10 @@ class Game < ActiveRecord::Base
     if !finished? && open_game.present? && open_game.id != id
       errors.add(:status, 'with value :created or :running can only exist once per group')
     end
+  end
+
+  def number_of_teams
+    errors.add(:teams, 'too many') if teams.count > 2
   end
 
   # private instance methods ...................................................
