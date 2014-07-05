@@ -5,7 +5,7 @@ class Player < ActiveRecord::Base
   # associations ...............................................................
   belongs_to :group
 
-  has_and_belongs_to_many :teams
+  has_and_belongs_to_many :teams, -> { uniq }
 
   has_many :games, through: :teams
 

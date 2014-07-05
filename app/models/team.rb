@@ -5,24 +5,18 @@ class Team < ActiveRecord::Base
   # associations ...............................................................
   belongs_to :game
 
-  has_and_belongs_to_many :players
+  has_and_belongs_to_many :players, -> { uniq }
 
   # scopes .....................................................................
   # validations ................................................................
-  validate :player_uniqueness
   validate :maximum_of_two_players
 
   # callbacks ..................................................................
   # additional config ..........................................................
   # class methods ..............................................................
   # instance methods ...........................................................
-  def player_uniqueness
-    ids = player_ids + (game.teams - [self]).map(&:player_ids)
-    errors.add(:players, 'in teams are not unique') if ids.count != ids.uniq.count
-  end
-
   def maximum_of_two_players
-
+    # TODO implement
   end
 
   # protected instance methods .................................................

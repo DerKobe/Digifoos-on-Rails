@@ -3,54 +3,45 @@ require 'spec_helper'
 RSpec.describe Team, :type => :model do
   describe 'expects to have a valid factories' do
     it 'for team' do
-      expect(FactoryGirl.build(:team)).to be_valid
+      team = FactoryGirl.create(:team)
+      expect(team).to be_valid
+      expect(team.players.count).to be 0
     end
 
     it 'for team with one player' do
-      expect(FactoryGirl.create(:team_with_one_player)).to be_valid
+      team = FactoryGirl.create(:team_with_one_player)
+      expect(team).to be_valid
+      expect(team.players.count).to be 1
     end
 
     it 'for team with two players' do
-      expect(FactoryGirl.create(:team_with_two_players)).to be_valid
+      team = FactoryGirl.create(:team_with_two_players)
+      expect(team).to be_valid
+      expect(team.players.count).to be 2
     end
   end
 
-  describe 'validations' do
-    context 'regarding uniqueness of players' do
+  describe 'validates' do
+    context 'uniqueness of players:' do
       it 'allows team with no players' do
-        team = FactoryGirl.build :team
+        team = FactoryGirl.create :team
         expect(team).to be_valid
       end
 
       it 'allows team with one player' do
-        team = FactoryGirl.build :team_with_one_player
+        team = FactoryGirl.create :team_with_one_player
         expect(team).to be_valid
       end
 
-      it 'allows team with two players' do
-        team = FactoryGirl.build :team_with_two_players
+      it 'allows team with two different players' do
+        team = FactoryGirl.create :team_with_two_players
         expect(team).to be_valid
       end
 
-      it 'allows two teams of same game with different players each (1/4)' do
-        team1 = FactoryGirl.build :team_with_one_player
-        team2 = FactoryGirl.build :team_with_one_player, game: team1.game
-        expect(team1).to be_valid
-        expect(team2).to be_valid
-      end
-
-      it 'allows two teams of same game with different players each (2/4)' do
-        team1 = FactoryGirl.build :team_with_two_players
-        team2 = FactoryGirl.build :team_with_one_player, game: team1.game
-        expect(team1).to be_valid
-        expect(team2).to be_valid
-      end
-
-      it 'allows two teams of same game with different players each (3/4)' do
-        team1 = FactoryGirl.build :team_with_two_players
-        team2 = FactoryGirl.build :team_with_two_players, game: team1.game
-        expect(team1).to be_valid
-        expect(team2).to be_valid
+      it 'denies team with the same player twice' do
+        team = FactoryGirl.create :team_with_one_player
+        player = team.players.last
+        expect { team.players << player }.to raise_exception ActiveRecord::RecordNotUnique
       end
     end
 

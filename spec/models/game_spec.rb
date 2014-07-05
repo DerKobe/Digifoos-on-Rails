@@ -2,9 +2,21 @@ require 'spec_helper'
 
 RSpec.describe Game, :type => :model do
   let(:game) { FactoryGirl.build(:game) }
+  let(:game_with_teams_and_one_player_each) { FactoryGirl.create(:game_with_teams_and_one_player_each) }
+  let(:game_with_teams_and_two_players_each) { FactoryGirl.create(:game_with_teams_and_two_players_each) }
 
-  it 'expects to have a valid factory' do
-    expect(game).to be_valid
+  describe 'expects to have a valid factories' do
+    it 'for game' do
+      expect(game).to be_valid
+    end
+
+    it 'for game with teams and one player each' do
+      expect(game_with_teams_and_one_player_each).to be_valid
+    end
+
+    it 'game with teams and two players each' do
+      expect(game_with_teams_and_two_players_each).to be_valid
+    end
   end
 
   it 'has three possible statuses' do
@@ -20,6 +32,12 @@ RSpec.describe Game, :type => :model do
     it 'presence of status' do
       game.status = nil
       expect(game).to_not be_valid
+    end
+
+    it 'the same player can not play in both teams' do
+      player = game_with_teams_and_one_player_each.teams.last.players.last
+      game_with_teams_and_one_player_each.teams.first.players << player
+      expect(game_with_teams_and_one_player_each).to_not be_valid
     end
 
     context 'there can be only one open game per group:' do

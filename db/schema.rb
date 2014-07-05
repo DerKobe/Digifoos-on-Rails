@@ -47,8 +47,7 @@ ActiveRecord::Schema.define(version: 20140627150938) do
     t.integer "team_id",   null: false
   end
 
-  add_index "players_teams", ["player_id"], name: "index_players_teams_on_player_id", using: :btree
-  add_index "players_teams", ["team_id"], name: "index_players_teams_on_team_id", using: :btree
+  add_index "players_teams", ["team_id", "player_id"], name: "index_players_teams_on_team_id_and_player_id", unique: true, using: :btree
 
   create_table "roles", force: true do |t|
     t.string   "name"

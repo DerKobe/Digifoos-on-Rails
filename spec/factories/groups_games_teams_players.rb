@@ -18,15 +18,15 @@ FactoryGirl.define do
 
     factory :game_with_teams_and_one_player_each do
       after(:create) do |g|
-        create :team_with_one_player, game: g
-        create :team_with_one_player, game: g
+        g.teams << create(:team_with_one_player, game: g)
+        g.teams << create(:team_with_one_player, game: g)
       end
     end
 
     factory :game_with_teams_and_two_players_each do
       after(:create) do |g|
-        create :team_with_two_players, game: g
-        create :team_with_two_players, game: g
+        g.teams << create(:team_with_two_players, game: g)
+        g.teams << create(:team_with_two_players, game: g)
       end
     end
   end

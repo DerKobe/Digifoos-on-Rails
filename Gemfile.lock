@@ -9,9 +9,9 @@ GIT
 
 GIT
   remote: git://github.com/salsify/goldiloader.git
-  revision: 8ef4fa5a4043d9cbf2fb42fd42ddd96ccad1248a
+  revision: 1678c7558a5459feebea7ad01af4f2309f726a1a
   specs:
-    goldiloader (0.0.5)
+    goldiloader (0.0.6)
       activerecord (>= 3.2, < 4.2)
       activesupport (>= 3.2, < 4.2)
 
