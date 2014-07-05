@@ -1,9 +1,9 @@
 class GamesController < ApplicationController
-  before_filter :load_group
   load_resource except: :create
+  before_filter :load_and_authorize_group
 
   # POST /groups/:group_id/games
-  def create # status = 'created'
+  def create
     flash = {}
 
     if GamesService.open_game_for(@group).present?
@@ -20,20 +20,28 @@ class GamesController < ApplicationController
   end
 
   # POST /games/:id/start
-  def start # status 'created' => 'running'
+  def start
+    @game.start!
+    render 'open_game'
+  end
+
+  # POST /games/:id/canel
+  def cancel
+    @game.destroy!
+    render 'cancel_game'
   end
 
   # POST /games/:id/finish
-  def finish # status 'running' => 'finished'
+  def finish
   end
 
   # POST /games/:id/players/:player_id
   def set_player
     player_operation do |team, player|
-      team.players << player if team.players.count < 2 && !team.players.include?(player)
+      team.players << player if team.players.count < 2 && !team.players.include?(player) && !(@game.teams - [team]).first.players.include?(player)
     end
 
-    render 'created_game'
+    render 'open_game'
   end
 
   # DELETE /games/:id/players/:player_id
@@ -46,20 +54,18 @@ class GamesController < ApplicationController
   end
 
   # POST /games/:id/teams/:team_id/goals/:action => ['inc','dec']
-  def change_score # status == 'created'
+  def change_score
   end
 
   private
 
-  def load_group
-    @group = Group.find(params[:group_id] || params[:id])
+  def load_and_authorize_group
+    @group = @game ? @game.group : Group.find(params[:id])
     authorize! :update, @group
   end
 
   def player_operation
-    @open_game = @group.games.find(params[:game_id])
-
-    @open_game.teams.find(params[:team_id]).tap do |team|
+    @game.teams.find(params[:team_id]).tap do |team|
       player = @group.players.find(params[:player_id])
       yield team, player
     end

@@ -5,10 +5,16 @@ Rails.application.routes.draw do
     resources :players, except: :index
 
     member do
-      post :games, to: 'games#create', as: :create_game
+      post 'games', to: 'games#create', as: :create_game
+    end
+  end
 
-      post   'games/:game_id/teams/:team_id/players/:player_id', to: 'games#set_player',    as: :set_player
-      delete 'games/:game_id/teams/:team_id/players/:player_id', to: 'games#remove_player', as: :remove_player
+  resources :games, only: [] do
+    member do
+      post   'start'
+      delete 'cancel'
+      post   'teams/:team_id/players/:player_id', to: 'games#set_player',    as: :set_player
+      delete 'teams/:team_id/players/:player_id', to: 'games#remove_player', as: :remove_player
     end
   end
 

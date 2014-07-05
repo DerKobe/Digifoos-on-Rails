@@ -36,7 +36,7 @@ class ApplicationController < ActionController::Base
   private
 
   def current_group
-    @current_group ||= begin
+    @group ||= begin
       if params[:group_id].present? || (params[:controller] == 'groups' && params[:id].present?)
         Group.find params[:group_id] || params[:id]
       end

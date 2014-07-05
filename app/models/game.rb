@@ -7,7 +7,7 @@ class Game < ActiveRecord::Base
   # associations ...............................................................
   belongs_to :group
 
-  has_many   :teams
+  has_many   :teams, dependent: :destroy
   has_many   :players, through: :teams
 
   has_one    :user, through: :group
@@ -27,6 +27,16 @@ class Game < ActiveRecord::Base
 
   # class methods ..............................................................
   # instance methods ...........................................................
+
+  # the game can be started if there are two teams present with at least one player on each team
+  def ready_to_play?
+    teams.count == 2 && teams.map{|t| t.player_ids.count }.min > 0
+  end
+
+  def start!
+    update status: :running if ready_to_play?
+  end
+
   # protected instance methods .................................................
   protected
 

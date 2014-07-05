@@ -1,6 +1,7 @@
 .games
-  - if @open_game
-    = render 'games/open_game'
+  .open-game
+    - if @game
+      = render "games/#{@game.status}_game"
 
   - if @games.any?
     .all-games

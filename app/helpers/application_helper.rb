@@ -10,7 +10,15 @@ module ApplicationHelper
   # class methods ..............................................................
   # helper methods .............................................................
   def current_group
-    @current_group
+    @group
+  end
+
+  def spinner
+    '<i class="fa fa-refresh fa-spinner"></i>'.html_safe
+  end
+
+  def player_link(player)
+    link_to player.name, group_player_path(current_group, player)
   end
 
   # protected instance methods .................................................

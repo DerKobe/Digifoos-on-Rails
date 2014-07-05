@@ -5,10 +5,6 @@ module GroupsHelper
   # additional config ..........................................................
   # class methods ..............................................................
   # helper methods .............................................................
-  def player_link(player)
-    link_to player.name, group_player_path(current_group, player)
-  end
-
   def winner_loser_class(team)
     winner_class = 'winner'
     loser_class  = 'loser'
