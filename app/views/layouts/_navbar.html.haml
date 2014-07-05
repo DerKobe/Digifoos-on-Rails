@@ -13,6 +13,8 @@
         = link_to 'Digifoos', root_path, :class => 'navbar-brand'
 
     .collapse.navbar-collapse
+      %ul.nav.navbar-nav
+        = yield :navbar
 
       %ul.nav.navbar-nav.navbar-right
         - if user_signed_in?

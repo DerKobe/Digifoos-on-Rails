@@ -2,30 +2,31 @@
 
 - content_for :breadcrumbs do
   #header.row
-    %div{ class: can?(:update, @group) ? 'col-md-7' : 'col-md-12' }
+    .col-md-12
       %ol.breadcrumb
         %li
           = link_to fa_icon('home'), root_path
         %li.active
           = current_group.name
-    - if can? :update, @group
-      .col-md-5
-        .actions.pull-right
-          %a.btn.btn-default(href="#")
-            = fa_icon 'cog'
-            &nbsp;
-            Manage Players
 
-          - if false
-            %a.btn.btn-danger(href="#")
-              = fa_icon 'stop'
-              &nbsp;
-              Game Over
-          - else
-            %a.btn.btn-primary(data-method="POST"){ href: create_game_group_path(@group) }
-              = fa_icon 'play'
-              &nbsp;
-              Start New Game
+- content_for :navbar do
+  %li
+    %a(href="#")
+      = fa_icon 'cog'
+      &nbsp;
+      Manage Players
+
+  %li
+    %a(href="#")
+      = fa_icon 'stop'
+      &nbsp;
+      Game Over
+
+  %li
+    %a(data-method="POST"){ href: create_game_group_path(@group) }
+      = fa_icon 'play'
+      &nbsp;
+      Start New Game
 
 .row
   .col-md-7
