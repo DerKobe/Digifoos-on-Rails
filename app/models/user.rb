@@ -8,7 +8,6 @@ class User < ActiveRecord::Base
 
   # scopes .....................................................................
   # validations ................................................................
-
   validates :username,
             :presence => true,
             :length => { :maximum => 255 },
@@ -18,13 +17,11 @@ class User < ActiveRecord::Base
 
   # callbacks ..................................................................
   # additional config ..........................................................
-
   attr_accessor :login
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
 
   rolify
 

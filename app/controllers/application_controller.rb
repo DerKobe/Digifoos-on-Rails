@@ -1,25 +1,13 @@
 class ApplicationController < ActionController::Base
-  # extends ....................................................................
-  # includes ...................................................................
-  # constants ..................................................................
-  # filters ....................................................................
   before_filter :current_group
+  before_action :configure_permitted_parameters, if: :devise_controller?
 
-  # helpers ....................................................................
-  # scopes .....................................................................
-  # additional config ..........................................................
-
-  # Prevent CSRF attacks by raising an exception.
-  # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
   check_authorization :unless => :devise_controller?
 
   rescue_from CanCan::AccessDenied, :with => :forbidden
   rescue_from ActiveRecord::RecordNotFound, :with => :not_found
-
-  # controller actions .........................................................
-  # protected instance methods .................................................
 
   protected
 
@@ -33,7 +21,10 @@ class ApplicationController < ActionController::Base
     render :not_found, :status => :not_found
   end
 
-  private
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.for(:sign_up) << :username
+    devise_parameter_sanitizer.for(:sign_up) << :email
+  end
 
   def current_group
     @group ||= begin
