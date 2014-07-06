@@ -4,6 +4,8 @@ class GroupsController < ApplicationController
   before_filter :current_group, only: [:show, :edit, :update, :destroy]
 
   def index
+    redirect_to :root unless user_signed_in?
+
     @groups = Group.where(user: current_user).order('created_at')
   end
 
