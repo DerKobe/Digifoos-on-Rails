@@ -1,1 +1,1 @@
-$('.open-game').html('<%= j render "games/#{@game.status}_game" %>');
+$('.open-game').html('<%= j render "games/#{@game.try(:status) || 'start'}_game" %>');

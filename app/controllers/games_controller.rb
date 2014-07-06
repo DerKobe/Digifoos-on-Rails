@@ -4,19 +4,16 @@ class GamesController < ApplicationController
 
   # POST /groups/:group_id/games
   def create
-    flash = {}
-
-    if GamesService.open_game_for(@group).present?
-      flash[:alert] = 'There already is a not finished game. Finish it first before you start a new one.'
-    else
-      game = @group.games.create!
-      game.teams.create!
-      game.teams.create!
-
-      flash[:notice] = 'A new game was successfuly started!'
+    begin
+      @game = @group.games.create!
+      @game.teams.create!
+      @game.teams.create!
+    rescue => e
+      Rails.logger.error e
+      @game = GamesService.open_game_for @group
     end
 
-    redirect_to @group, flash
+    render 'open_game'
   end
 
   # POST /games/:id/start
@@ -28,11 +25,14 @@ class GamesController < ApplicationController
   # POST /games/:id/canel
   def cancel
     @game.destroy!
-    render 'cancel_game'
+    @game = nil
+    render 'open_game'
   end
 
   # POST /games/:id/finish
   def finish
+    @game.update status: :finished if @game.finishable?
+    redirect_to @group
   end
 
   # POST /games/:id/players/:player_id
@@ -50,7 +50,7 @@ class GamesController < ApplicationController
       team.players.delete(player) if player.present?
     end
 
-    render 'created_game'
+    render 'open_game'
   end
 
   # POST /games/:id/teams/:team_id/goals/:action => ['inc','dec']

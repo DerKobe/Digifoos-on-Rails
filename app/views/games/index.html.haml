@@ -1,7 +1,6 @@
 .games
   .open-game
-    - if @game
-      = render "games/#{@game.status}_game"
+    = render "games/#{@game.try(:status) || 'start' }_game"
 
   - if @games.any?
     .all-games

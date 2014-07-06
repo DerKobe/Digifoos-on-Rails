@@ -1,26 +1,16 @@
 module ApplicationHelper
-  # extends ....................................................................
-  # includes ...................................................................
-
   include BootstrapFlashHelper
   include FontAwesome::Rails::IconHelper
 
-  # constants ..................................................................
-  # additional config ..........................................................
-  # class methods ..............................................................
-  # helper methods .............................................................
   def current_group
     @group
   end
 
   def spinner
-    '<i class="fa fa-refresh fa-spinner"></i>'.html_safe
+    fa_icon 'refresh spin'
   end
 
   def player_link(player)
     link_to player.name, group_player_path(current_group, player)
   end
-
-  # protected instance methods .................................................
-  # private instance methods ...................................................
 end

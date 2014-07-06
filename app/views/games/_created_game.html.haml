@@ -35,7 +35,7 @@
       .col-md-12
         - (teams.map(&:player_ids).flatten.count == 4).tap do |ready|
           - if ready
-            %div.start
+            .start
               %a.btn.btn-success.btn-lg(data-method="POST" data-remote="true"){ href: start_game_path(@game), 'data-disable-with' => spinner }
                 = fa_icon 'play'
                 Let's Roll!

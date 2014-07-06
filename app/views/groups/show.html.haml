@@ -12,21 +12,7 @@
 - content_for :navbar do
   %li
     %a(href="#")
-      = fa_icon 'cog'
-      &nbsp;
-      Manage Players
-
-  %li
-    %a(href="#")
-      = fa_icon 'stop'
-      &nbsp;
-      Game Over
-
-  %li
-    %a(data-method="POST"){ href: create_game_group_path(@group) }
-      = fa_icon 'play'
-      &nbsp;
-      Start New Game
+      = fa_icon 'cog', text: 'Manage Players'
 
 .row
   .col-md-7

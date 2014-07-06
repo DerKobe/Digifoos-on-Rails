@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :games, only: [] do
     member do
       post   'start'
+      post   'finish'
       delete 'cancel'
       post   'teams/:team_id/players/:player_id', to: 'games#set_player',    as: :set_player
       delete 'teams/:team_id/players/:player_id', to: 'games#remove_player', as: :remove_player

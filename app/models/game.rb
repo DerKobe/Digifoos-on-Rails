@@ -33,6 +33,11 @@ class Game < ActiveRecord::Base
     teams.count == 2 && teams.map{|t| t.player_ids.count }.min > 0
   end
 
+  def finishable?
+    # TODO implement
+    true
+  end
+
   def start!
     update status: :running if ready_to_play?
   end

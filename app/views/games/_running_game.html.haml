@@ -27,3 +27,14 @@
             .btn-group
               %a.btn.btn-lg.btn-danger(href="#")= fa_icon 'minus'
               %a.btn.btn-lg.btn-success(href="#")= fa_icon 'plus'
+
+  - if can? :update, @game
+    .row.actions
+      .col-md-12
+        .finish
+          - if @game.finishable?
+            %a.btn.btn-success.btn-lg(data-method="POST"){ href: finish_game_path(@game), 'data-disable-with' => spinner }
+              = fa_icon 'flag-checkered', text: 'Game Over!'
+
+        %a.btn.btn-danger(data-method="DELETE" data-remote="true" data-confirm="Are you sure?"){ href: cancel_game_path(@game), 'data-disable-with' => spinner }
+          = fa_icon 'ban', text: 'Abort Game'
