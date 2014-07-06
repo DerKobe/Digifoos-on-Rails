@@ -1,0 +1,20 @@
+- content_for :breadcrumbs do
+  #header.row
+    .col-md-12
+      %ol.breadcrumb
+        %li
+          = link_to fa_icon('home'), root_path
+        %li
+          = link_to current_group.name, group_path(current_group)
+        %li
+          = player_link @player.id
+        %li
+          Edit
+
+.row
+  .col-md-3
+  .col-md-6
+    = simple_form_for @player, url: group_player_path(@group, @player), method: :patch do |f|
+      = f.error_notification
+      = f.input :name, placeholder: 'Name', label: false
+      = f.submit value: 'Save Changes', class: 'btn btn-success full-width'

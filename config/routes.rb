@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :groups do
-    resources :players, except: :index
+    resources :players
 
     member do
       post 'games', to: 'games#create', as: :create_game

@@ -2,7 +2,7 @@ module PlayersService
   using SqlTrimmer
 
   class << self
-    QUERY = <<-SQL
+    GET_PLAYERS_QUERY = <<-SQL
                SELECT
                  players.*,
                  COALESCE(SUM(teams.goals),  0) AS goals,
@@ -22,11 +22,15 @@ module PlayersService
     SQL
 
     def get_players_for(group, limit = 100)
-      Player.find_by_sql([QUERY.trim, group.id, limit]).map do |player|
+      Player.find_by_sql([GET_PLAYERS_QUERY.trim, group.id, limit]).map do |player|
         player.points = player['points']
         player.goals  = player['goals']
         player
       end
+    end
+
+    def played_already?(player_id)
+      ActiveRecord::Base.connection.execute("SELECT COUNT(*) AS cnt FROM players_teams WHERE player_id = #{ActiveRecord::Base.connection.quote player_id}").first['cnt'] != "0"
     end
 
   end

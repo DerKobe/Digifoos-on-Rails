@@ -1,20 +1,36 @@
-.players
-  - if @players.any?
-    .list-group
-      - @players.each_with_index do |player, position|
-        = link_to group_player_path(current_group, player), class: 'list-group-item' do
-          .label.label-primary.pull-left
-            %span.number= position + 1
+- content_for :breadcrumbs do
+  #header.row
+    .col-md-12
+      %ol.breadcrumb
+        %li
+          = link_to fa_icon('home'), root_path
+        %li.active
+          = link_to current_group.name, group_path(current_group)
+        %li.active
+          Manage Players
 
-          - if position < 3
-            %span.trophy{ class: "position-#{position}" }= fa_icon 'trophy'
+.row
+  .col-md-3
+  .col-md-6
+    .players
+      - if @players.any?
+        %ul.list-group
+          - @players.each do |player|
+            %li.list-group-item
+              = player.name
+              .btn-group.pull-right
+                - unless PlayersService.played_already?(player.id)
+                  = link_to group_player_path(current_group, player), class: 'btn btn-sm btn-danger', data: { method: 'delete' } do
+                    = fa_icon 'ban', text: 'Delete'
+                = link_to edit_group_player_path(current_group, player), class: 'btn btn-sm btn-primary' do
+                  = fa_icon 'pencil', text: 'Edit'
 
-          = player.name
+      - else
+        .alert.alert-warning
+          No players found.
 
-          .label.label-success.pull-right
-            %span.text Points
-            %span.number= player.points
+      - if can? :update, @group
+        %a.btn.btn-primary.full-width{ href: new_group_player_path(@group) }
+          = fa_icon 'plus', text: 'Add Player'
 
-  - else
-    .alert.alert-warning
-      No players found.
+  .col-md-3

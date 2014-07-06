@@ -4,13 +4,15 @@
       %ol.breadcrumb
         %li
           = link_to fa_icon('home'), root_path
+        %li
+          = link_to @group.name, group_path(@group)
         %li.active
-          = "Edit #{@group.name}"
+          Edit
 
 = simple_form_for @group, url: group_path(@group), method: :patch do |f|
   = f.error_notification
   = f.input :name, placeholder: 'Name', label: false
-  = f.button :submit, class: 'btn-primary', value: 'Save'
+  = f.button :submit, class: 'btn-primary', value: 'Save Changes'
 
 %hr
 

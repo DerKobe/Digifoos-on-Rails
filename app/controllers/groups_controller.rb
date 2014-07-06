@@ -26,7 +26,7 @@ class GroupsController < ApplicationController
     @group = Group.create group_params
 
     if @group.persisted?
-      redirect_to :root
+      redirect_to group_players_path(@group)
     else
       render :new
     end

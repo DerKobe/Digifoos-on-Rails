@@ -11,7 +11,7 @@
 
 - content_for :navbar do
   %li
-    %a(href="#")
+    %a{ href: group_players_path(current_group) }
       = fa_icon 'users', text: 'Manage Players'
   %li
     %a{ href: edit_group_path(current_group) }
@@ -22,4 +22,4 @@
     = render file: 'games/index'
 
   .col-md-5
-    = render file: 'players/index'
+    = render file: 'players/ranked_list'

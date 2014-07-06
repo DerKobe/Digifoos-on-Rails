@@ -11,7 +11,12 @@ module ApplicationHelper
   end
 
   def player_link(player_id)
-    name = @players.select{ |player| player.id == player_id }.first.name
+    name = if @players.present?
+             @players.select{ |player| player.id == player_id }.first.name
+           else
+             Player.find(player_id).name
+           end
+
     link_to name, group_player_path(current_group, player_id)
   end
 end
