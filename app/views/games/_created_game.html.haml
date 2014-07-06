@@ -6,32 +6,10 @@
 
     - @game.teams.order('teams.id ASC').tap do |teams|
       .row
-        - 0.tap do |i|
-          .col-xs-3
-            - if teams[i].players.count < 2
-              %ul.available-players{ class: "available-players-#{i}" }
-                - (@group.players.order('name') - teams[i].players - teams[(i + 1) % 2].players).each do |player|
-                  %li
-                    %a(data-method="POST" data-remote="true"){ href: set_player_game_path(@game, teams[i], player) }= player.name
-          .col-xs-3
-            %ul.chosen-players{ class: "chosen-players-#{i}" }
-              - teams[i].players.each do |player|
-                %li
-                  %a(data-method="DELETE" data-remote="true"){ href: remove_player_game_path(@game, teams[i], player) }= player.name
-
-        - 1.tap do |i|
-          .col-xs-3
-            %ul.chosen-players{ class: "chosen-players-#{i}" }
-              - teams[i].players.each do |player|
-                %li
-                  %a(data-method="DELETE" data-remote="true"){ href: remove_player_game_path(@game, teams[i], player) }= player.name
-          .col-xs-3
-            - if teams[i].players.count < 2
-              %ul.available-players{ class: "available-players-#{i}" }
-                - (@group.players.order('name') - teams[i].players - teams[(i + 1) % 2].players).each do |player|
-                  %li
-                    %a(data-method="POST" data-remote="true"){ href: set_player_game_path(@game, teams[i], player) }= player.name
-
+        = render 'games/addable_players_list',    teams: teams, current: 0
+        = render 'games/removeable_players_list', teams: teams, current: 0
+        = render 'games/removeable_players_list', teams: teams, current: 1
+        = render 'games/addable_players_list',    teams: teams, current: 1
 
       .row.actions
         .col-md-12

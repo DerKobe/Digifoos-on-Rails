@@ -1,0 +1,6 @@
+.col-xs-3
+  - if teams[current].players.count < 2
+    %ul.available-players{ class: "available-players-#{current}" }
+      - (@group.players.order('name') - teams[current].players - teams[(current + 1) % 2].players).each do |player|
+        %li
+          %a(data-method="POST" data-remote="true"){ href: set_player_game_path(@game, teams[current], player) }= player.name

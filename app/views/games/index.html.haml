@@ -7,22 +7,22 @@
       %table.table.table-striped
         %tbody
           - @games.each do |game|
+            - if @last_timestamp.try(:at_beginning_of_day) != game.created_at.at_beginning_of_day
+              - @last_timestamp = game.created_at.at_beginning_of_day
+              %tr.date-indicator
+                %td(colspan="3")
+                  = l @last_timestamp.to_date, format: :long
+
             - game.teams.order('teams.id ASC').tap do |team|
               %tr
-                %td.team
-                  %span.player><= player_link team[0].players.first
-                  ,&nbsp;
-                  %span.player><= player_link team[0].players.last
+                = render 'games/team_cell', team: team[0]
                 %td.score
                   %span{ class: winner_loser_class(team[0]) }><= fa_icon 'star'
                   .label.alert-info><= team[0].goals
                   %span><= ':'
                   .label.alert-info><= team[1].goals
                   %span{ class: winner_loser_class(team[1]) }><= fa_icon 'star'
-                %td.team
-                  %span.player><= player_link team[1].players.first
-                  ,&nbsp;
-                  %span.player><= player_link team[1].players.last
+                = render 'games/team_cell', team: team[1]
 
       = paginate @games
 

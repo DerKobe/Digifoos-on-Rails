@@ -3,10 +3,10 @@ if Rails.env.development?
   user = User.create!(
       email:    'philip.claren@googlemail.com',
       username: 'Kobe',
-      password: 'philip.claren@googlemail.com'
+      password: 'Testest12'
   )
 
-  group = user.groups.create! name: 'Super Turnier'
+  group = user.groups.create! name: 'Pokercrew'
 
   players = []
 
@@ -15,9 +15,16 @@ if Rails.env.development?
   players << group.players.create!(name: 'Alexander')
   players << group.players.create!(name: 'Christoph')
   players << group.players.create!(name: 'Philip')
+  players << group.players.create!(name: 'Sabine')
+  players << group.players.create!(name: 'Christina')
+  players << group.players.create!(name: 'Eva')
+  players << group.players.create!(name: 'Nadine')
+  players << group.players.create!(name: 'Sonja')
 
-  100.times do |i|
-    game = group.games.create! status: :finished
+  x = 42
+
+  42.times do |i|
+    game = group.games.create! status: :finished, created_at: x.days.ago
 
     score1 = rand(8)
     score2 = case score1
@@ -37,7 +44,7 @@ if Rails.env.development?
     game.teams.create! players: players[0..1], goals: score1, points: score1 > score2 ? 1 : -1
     game.teams.create! players: players[2..3], goals: score2, points: score1 < score2 ? 1 : -1
 
-    #print "#{i}:" if i % 100 == 0
+    x -= rand(2) if rand(3) == 0
   end
 
 end
