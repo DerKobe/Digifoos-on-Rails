@@ -1,0 +1,7 @@
+- content_for :navbar do
+  %li
+    %a{ href: group_players_path(current_group) }
+      = fa_icon 'users', text: 'Manage Players'
+  %li
+    %a{ href: edit_group_path(current_group) }
+      = fa_icon 'cog', text: 'Edit Group'

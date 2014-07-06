@@ -1,4 +1,6 @@
-- set_meta_tags title: current_group.name
+- set_meta_tags title: @group.name
+
+- render 'groups/default_navbar'
 
 - content_for :breadcrumbs do
   #header.row
@@ -9,17 +11,9 @@
         %li.active
           = current_group.name
 
-- content_for :navbar do
-  %li
-    %a{ href: group_players_path(current_group) }
-      = fa_icon 'users', text: 'Manage Players'
-  %li
-    %a{ href: edit_group_path(current_group) }
-      = fa_icon 'cog', text: 'Edit Group'
-
 .row
   .col-md-7
-    = render file: 'games/index'
+    = render 'games/paginated_list'
 
   .col-md-5
-    = render file: 'players/ranked_list'
+    = render 'players/ranked_list'

@@ -30,7 +30,7 @@ module PlayersService
     end
 
     def played_already?(player_id)
-      ActiveRecord::Base.connection.execute("SELECT COUNT(*) AS cnt FROM players_teams WHERE player_id = #{ActiveRecord::Base.connection.quote player_id}").first['cnt'] != "0"
+      ActiveRecord::Base.connection.execute("SELECT 1 FROM players_teams WHERE player_id = #{ActiveRecord::Base.connection.quote player_id} LIMIT 1").first.present?
     end
 
   end
