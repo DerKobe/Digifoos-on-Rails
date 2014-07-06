@@ -8,16 +8,22 @@
         %tbody
           - @games.each do |game|
             = date_indicator game
-            - game.teams.order('teams.id ASC').tap do |team|
+            - game.ordered_teams.tap do |teams|
               %tr
-                = render 'games/team_cell', team: team[0]
+                %td.team
+                  %span.player><= player_link teams[0].player_ids.first
+                  ,&nbsp;
+                  %span.player><= player_link teams[0].player_ids.last
                 %td.score
-                  %span{ class: winner_loser_class(team[0]) }><= fa_icon 'star'
-                  .label.alert-info><= team[0].goals
+                  %span{ class: winner_loser_class(teams[0]) }><= fa_icon 'star'
+                  .label.alert-info><= teams[0].goals
                   %span><= ':'
-                  .label.alert-info><= team[1].goals
-                  %span{ class: winner_loser_class(team[1]) }><= fa_icon 'star'
-                = render 'games/team_cell', team: team[1]
+                  .label.alert-info><= teams[1].goals
+                  %span{ class: winner_loser_class(teams[1]) }><= fa_icon 'star'
+                %td.team
+                  %span.player><= player_link teams[1].player_ids.first
+                  ,&nbsp;
+                  %span.player><= player_link teams[1].player_ids.last
 
       = paginate @games
 

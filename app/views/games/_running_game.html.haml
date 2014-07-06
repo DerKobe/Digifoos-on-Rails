@@ -1,19 +1,19 @@
 .running-game
-  - @game.teams.order('teams.id ASC').tap do |teams|
+  - @game.ordered_teams.tap do |teams|
     .row
       .goals.col-md-12
         = "#{teams[0].goals} : #{teams[1].goals}"
 
     .row
       .team1.team.col-xs-5
-        = player_link teams[0].players[0]
-        = player_link teams[0].players[1]
+        = player_link teams[0].player_ids[0]
+        = player_link teams[0].player_ids[1]
       .vs.col-xs-2
         .label.label-danger
           vs
       .team2.team.col-xs-5
-        = player_link teams[1].players[0]
-        = player_link teams[1].players[1]
+        = player_link teams[1].player_ids[0]
+        = player_link teams[1].player_ids[1]
 
     - if can? :update, @game
       .running-game-controls

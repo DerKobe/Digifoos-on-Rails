@@ -42,6 +42,10 @@ class Game < ActiveRecord::Base
     update status: :running if ready_to_play?
   end
 
+  def ordered_teams
+    teams.sort_by{|t| t.id }
+  end
+
   # protected instance methods .................................................
   protected
 
