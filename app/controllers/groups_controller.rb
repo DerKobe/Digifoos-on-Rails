@@ -9,7 +9,7 @@ class GroupsController < ApplicationController
     @group = current_group
     authorize! :read, @group
 
-    @games   = @group.games.includes(:teams, :players).where(status: Game.statuses[:finished]).order('created_at DESC').page(params[:page].to_i).per(20)
+    @games   = @group.games.includes(:teams, :players).where(status: Game.statuses[:finished]).order('created_at DESC').page(params[:page].to_i).per(15)
     @players = PlayersService.get_players_for(@group)
     @game    = @group.games.includes(:teams, :players).where(status: [Game.statuses[:created], Game.statuses[:running]]).first
   end
