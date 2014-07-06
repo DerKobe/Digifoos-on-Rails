@@ -7,21 +7,22 @@
       %table.table.table-striped
         %tbody
           - @games.each do |game|
-            %tr
-              %td.team
-                %span.player><= player_link game.teams.first.players.first
-                ,&nbsp;
-                %span.player><= player_link game.teams.first.players.last
-              %td.score
-                %span{ class: winner_loser_class(game.teams.first) }><= fa_icon 'star'
-                .label.alert-info><= game.teams.first.goals
-                %span><= ':'
-                .label.alert-info><= game.teams.last.goals
-                %span{ class: winner_loser_class(game.teams.last) }><= fa_icon 'star'
-              %td.team
-                %span.player><= player_link game.teams.last.players.first
-                ,&nbsp;
-                %span.player><= player_link game.teams.last.players.last
+            - game.teams.order('teams.id ASC').tap do |team|
+              %tr
+                %td.team
+                  %span.player><= player_link team[0].players.first
+                  ,&nbsp;
+                  %span.player><= player_link team[0].players.last
+                %td.score
+                  %span{ class: winner_loser_class(team[0]) }><= fa_icon 'star'
+                  .label.alert-info><= team[0].goals
+                  %span><= ':'
+                  .label.alert-info><= team[1].goals
+                  %span{ class: winner_loser_class(team[1]) }><= fa_icon 'star'
+                %td.team
+                  %span.player><= player_link team[1].players.first
+                  ,&nbsp;
+                  %span.player><= player_link team[1].players.last
 
       = paginate @games
 

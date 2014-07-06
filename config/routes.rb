@@ -14,6 +14,10 @@ Rails.application.routes.draw do
       post   'start'
       post   'finish'
       delete 'cancel'
+
+      post   'teams/:team_id', to: 'games#inc_goals', as: :inc_goals
+      delete 'teams/:team_id', to: 'games#dec_goals', as: :dec_goals
+
       post   'teams/:team_id/players/:player_id', to: 'games#set_player',    as: :set_player
       delete 'teams/:team_id/players/:player_id', to: 'games#remove_player', as: :remove_player
     end

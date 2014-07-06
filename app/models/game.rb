@@ -30,12 +30,12 @@ class Game < ActiveRecord::Base
 
   # the game can be started if there are two teams present with at least one player on each team
   def ready_to_play?
-    teams.count == 2 && teams.map{|t| t.player_ids.count }.min > 0
+    teams.count == 2 && teams.map{|t| t.player_ids.count }.min == 2
   end
 
   def finishable?
-    # TODO implement
-    true
+    goals = teams.map(&:goals)
+    goals.min != goals.max && ( (goals.min + 1 < goals.max) || (goals.max == 7) ) && goals.max >= 5
   end
 
   def start!

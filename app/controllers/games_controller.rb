@@ -31,7 +31,7 @@ class GamesController < ApplicationController
 
   # POST /games/:id/finish
   def finish
-    @game.update status: :finished if @game.finishable?
+    GamesService.finish_game @game if @game.finishable?
     redirect_to @group
   end
 
@@ -53,8 +53,16 @@ class GamesController < ApplicationController
     render 'open_game'
   end
 
-  # POST /games/:id/teams/:team_id/goals/:action => ['inc','dec']
-  def change_score
+  # POST /games/:id/teams/:team_id
+  def inc_goals
+    GamesService.inc_goals @game, params[:team_id]
+    render 'open_game'
+  end
+
+  # DELETE /games/:id/teams/:team_id
+  def dec_goals
+    GamesService.dec_goals @game, params[:team_id]
+    render 'open_game'
   end
 
   private
