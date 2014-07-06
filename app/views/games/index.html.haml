@@ -7,12 +7,7 @@
       %table.table.table-striped
         %tbody
           - @games.each do |game|
-            - if @last_timestamp.try(:at_beginning_of_day) != game.created_at.at_beginning_of_day
-              - @last_timestamp = game.created_at.at_beginning_of_day
-              %tr.date-indicator
-                %td(colspan="3")
-                  = l @last_timestamp.to_date, format: :long
-
+            = date_indicator game
             - game.teams.order('teams.id ASC').tap do |team|
               %tr
                 = render 'games/team_cell', team: team[0]
