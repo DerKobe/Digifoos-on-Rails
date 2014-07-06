@@ -18,10 +18,11 @@ module PlayersService
                  players.id
                ORDER BY
                  points DESC, goals DESC, players.id ASC
+               LIMIT ?
     SQL
 
-    def get_players_for(group)
-      Player.find_by_sql([QUERY.trim, group.id]).map do |player|
+    def get_players_for(group, limit = 100)
+      Player.find_by_sql([QUERY.trim, group.id, limit]).map do |player|
         player.points = player['points']
         player.goals  = player['goals']
         player

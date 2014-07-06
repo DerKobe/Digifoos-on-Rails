@@ -12,7 +12,10 @@
 - content_for :navbar do
   %li
     %a(href="#")
-      = fa_icon 'cog', text: 'Manage Players'
+      = fa_icon 'users', text: 'Manage Players'
+  %li
+    %a{ href: edit_group_path(current_group) }
+      = fa_icon 'cog', text: 'Edit Group'
 
 .row
   .col-md-7

@@ -1,0 +1,19 @@
+- content_for :breadcrumbs do
+  #header.row
+    .col-md-12
+      %ol.breadcrumb
+        %li
+          = link_to fa_icon('home'), root_path
+        %li.active
+          = "Edit #{@group.name}"
+
+= simple_form_for @group, url: group_path(@group), method: :patch do |f|
+  = f.error_notification
+  = f.input :name, placeholder: 'Name', label: false
+  = f.button :submit, class: 'btn-primary', value: 'Save'
+
+%hr
+
+%h1 Danger Zone!
+= simple_form_for @group, url: group_path(@group), method: :delete do |f|
+  = f.button :submit, class: 'btn-danger', value: "Delete #{@group.name} with all games and players", onclick: 'return confirm("Are you sure?");'

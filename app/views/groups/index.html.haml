@@ -2,10 +2,24 @@
 
 - content_for :breadcrumbs do
   %ol.breadcrumb
-    %li
+    %li><
       = link_to fa_icon('home'), root_path
-    %li.active
-      = link_to 'Groups', groups_path
+    %li.active><
+      Groups
 
-- @groups.each do |group|
-  %h3= link_to group.name, group_path(group)
+.groups-index
+  - if @groups.any?
+    .list-group
+      - @groups.each do |group|
+        = link_to group_path(group), class: 'list-group-item' do
+          %span.name= group.name
+          %span.stats.pull-right
+            = group_stats(group)
+
+
+  - else
+    .alert.alert-info
+      No groups created, yet.
+
+  %a.btn.btn-primary{ href: new_group_path }
+    = fa_icon 'plus', text: 'Add New Group'

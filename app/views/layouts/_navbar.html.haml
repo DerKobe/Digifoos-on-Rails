@@ -7,7 +7,7 @@
         %span.icon-bar
         %span.icon-bar
 
-      - if current_group.present?
+      - if current_group.present? && !current_group.id.nil?
         = link_to current_group.name, group_path(current_group), :class => 'navbar-brand'
       - else
         = link_to 'Digifoos', root_path, :class => 'navbar-brand'
