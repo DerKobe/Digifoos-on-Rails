@@ -20,13 +20,15 @@
         .row
           .team1.col-xs-5
             .btn-group
-              %a.btn.btn-lg.btn-success(data-method="POST" data-remote="true"){ href: inc_goals_game_path(@game, teams[0]) }= fa_icon 'plus'
+              - if teams[0].goals < 7
+                %a.btn.btn-lg.btn-success(data-method="POST" data-remote="true"){ href: inc_goals_game_path(@game, teams[0]) }= fa_icon 'plus'
               %a.btn.btn-lg.btn-danger(data-method="DELETE" data-remote="true"){ href: dec_goals_game_path(@game, teams[0]) }= fa_icon 'minus'
           .col-xs-2
           .team2.col-xs-5
             .btn-group
               %a.btn.btn-lg.btn-danger(data-method="DELETE" data-remote="true"){ href: dec_goals_game_path(@game, teams[1]) }= fa_icon 'minus'
-              %a.btn.btn-lg.btn-success(data-method="POST" data-remote="true"){ href: inc_goals_game_path(@game, teams[1]) }= fa_icon 'plus'
+              - if teams[1].goals < 7
+                %a.btn.btn-lg.btn-success(data-method="POST" data-remote="true"){ href: inc_goals_game_path(@game, teams[1]) }= fa_icon 'plus'
 
   - if can? :update, @game
     .row.actions

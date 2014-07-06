@@ -14,13 +14,13 @@ module GamesService
       team2.update points: (team2.goals > team1.goals ? 3 : -3)
     end
 
-    def inc_goals(game, team_id)
-      team = game.teams.find(team_id)
+    def inc_goals(team_id)
+      team = Team.find(team_id)
       team.update goals: team.goals + 1 if team.goals < 7
     end
 
-    def dec_goals(game, team_id)
-      team = game.teams.find(team_id)
+    def dec_goals(team_id)
+      team = Team.find(team_id)
       team.update goals: team.goals - 1 if team.goals > 0
     end
 

@@ -55,13 +55,13 @@ class GamesController < ApplicationController
 
   # POST /games/:id/teams/:team_id
   def inc_goals
-    GamesService.inc_goals @game, params[:team_id]
+    GamesService.inc_goals params[:team_id]
     render 'open_game'
   end
 
   # DELETE /games/:id/teams/:team_id
   def dec_goals
-    GamesService.dec_goals @game, params[:team_id]
+    GamesService.dec_goals params[:team_id]
     render 'open_game'
   end
 
