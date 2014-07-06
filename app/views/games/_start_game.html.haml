@@ -1,4 +1,4 @@
 .start-game
   - if can? :update, @group
-    %a.btn.btn-primary.full-width(data-method="POST" data-remote="true"){ href: create_game_group_path(@group), 'data-disable-with' => spinner }
+    %a.btn.btn-success.full-width(data-method="POST" data-remote="true"){ href: create_game_group_path(@group), 'data-disable-with' => spinner }
       = fa_icon 'play', text: 'Start New Game'
