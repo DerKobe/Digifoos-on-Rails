@@ -19,4 +19,4 @@
     = simple_form_for @player, url: group_players_path(@group), method: :post do |f|
       = f.error_notification
       = f.input :name, placeholder: 'Name', label: false
-      = f.submit value: 'Create Player', class: 'btn btn-success full-width'
+      = f.submit value: 'Create Player', class: 'btn btn-primary full-width'

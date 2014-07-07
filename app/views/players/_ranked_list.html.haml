@@ -7,7 +7,7 @@
             %span.number= position + 1
 
           - if position < 3
-            %span.trophy{ class: "position-#{position}" }= fa_icon 'trophy'
+            = fa_stacked_icon 'trophy inverse', base: 'circle', class: "trophy position-#{position}"
 
           = player.name
 

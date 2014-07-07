@@ -21,4 +21,4 @@
     = simple_form_for @player, url: group_player_path(@group, @player), method: :patch do |f|
       = f.error_notification
       = f.input :name, placeholder: 'Name', label: false
-      = f.submit value: 'Save Changes', class: 'btn btn-success full-width'
+      = f.submit value: 'Save Changes', class: 'btn btn-primary full-width'

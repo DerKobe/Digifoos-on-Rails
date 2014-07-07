@@ -35,7 +35,7 @@
       .col-md-12
         .finish
           - if @game.finishable?
-            %a.btn.btn-success.btn-lg(data-method="POST"){ href: finish_game_path(@game), 'data-disable-with' => spinner }
+            %a.btn.btn-primary.btn-lg(data-method="POST"){ href: finish_game_path(@game), 'data-disable-with' => spinner }
               = fa_icon 'flag-checkered', text: 'Game Over!'
 
         %a.btn.btn-danger.btn-sm(data-method="DELETE" data-remote="true" data-confirm="Are you sure?"){ href: cancel_game_path(@game), 'data-disable-with' => spinner }
