@@ -1,7 +1,7 @@
 %navbar.navbar.navbar-default.navbar-fixed-top
   .container
     .navbar-header
-      %button.navbar-toggle{ :type => 'button', :data => { :toggle => 'collapse', :target => '#bs-example-navbar-collapse-1' }}
+      %button.navbar-toggle(type="button" data-toggle="collapse" data-target="#navbar-collapse")
         %span.sr-only Toggle navigation
         %span.icon-bar
         %span.icon-bar
@@ -10,20 +10,20 @@
       - if current_group.present? && !current_group.id.nil?
         = link_to current_group.name, group_path(current_group), :class => 'navbar-brand'
       - else
-        = link_to 'Digifoos', root_path, :class => 'navbar-brand'
+        = link_to 'Digifoos', root_path, class: 'navbar-brand'
 
-    .collapse.navbar-collapse
+    #navbar-collapse.collapse.navbar-collapse
       %ul.nav.navbar-nav
         = yield :navbar
 
       %ul.nav.navbar-nav.navbar-right
         - if user_signed_in?
           %li.dropdown
-            %a.dropdown-toggle{ :href => '#', :data => { :toggle => 'dropdown' }}
+            %a.dropdown-toggle(href="#" data-toggle="dropdown")
               = gravatar_image_tag(current_user.email,
-                  :alt => current_user.username,
-                  :class => 'avatar',
-                  :gravatar => { :filetype => 'png', :size => 32 })
+                  alt:      current_user.username,
+                  class:    'avatar',
+                  gravatar: { filetype: 'png', size: 32 })
               = truncate current_user.username
               %b.caret
 
@@ -34,7 +34,7 @@
                   = "Edit #{User.model_name.human}"
               %li.divider
               %li
-                = link_to destroy_user_session_path, :method => :delete do
+                = link_to destroy_user_session_path, method: :delete do
                   = fa_icon 'sign-in'
                   Sign out
 
