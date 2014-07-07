@@ -12,6 +12,8 @@ on_worker_boot do
   ActiveSupport.on_load(:active_record) do
     config = ActiveRecord::Base.configurations[Rails.env] || Rails.application.config.database_configuration[Rails.env]
     config['pool'] = ENV['MAX_THREADS'] || 5
-    ActiveRecord::Base.establish_connection(config)
+    config['url']  = ENV['HEROKU_POSTGRESQL_MAUVE_URL']
+
+    ActiveRecord::Base.establish_connection(config.slice('adapter', 'pool', 'url'))
   end
 end
