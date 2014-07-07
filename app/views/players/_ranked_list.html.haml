@@ -8,8 +8,9 @@
 
           - if position < 3
             = fa_stacked_icon 'trophy inverse', base: 'circle', class: "trophy position-#{position}"
-
-          = player.name
+            %span.name.with_trophy= player.name
+          - else
+            %span.name= player.name
 
           .label.label-success.pull-right
             %span.text Points

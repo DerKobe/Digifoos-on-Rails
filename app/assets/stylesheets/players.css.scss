@@ -1,14 +1,28 @@
 .players {
   .trophy {
+    position: relative;
+    top: 1px;
+
     i { text-shadow: 0 -1px #999, 1px 0 #999, 0 1px #999, -1px 0 #999; }
     &.position-0 i.fa-circle { color: #ffed2c; }
     &.position-1 i.fa-circle { color: #dbdbdb; }
     &.position-2 i.fa-circle { color: #ffa43f; }
   }
 
+  .name {
+    height: 25px;
+    display: inline-block;
+    position: relative;
+    top: 4px;
+
+    &.with_trophy {
+      top: 2px;
+    }
+  }
+
   .label {
     position: relative;
-    top: -2px;
+    top: 1px;
 
     &.pull-left {
       margin-right: 10px;
@@ -23,7 +37,7 @@
     span {
       &.text {
         position: relative;
-        top: -2px;
+        top: -1px;
       }
 
       &.number {
