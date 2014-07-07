@@ -1,4 +1,10 @@
 GIT
+  remote: git://github.com/RolifyCommunity/rolify.git
+  revision: f2ad6cb43ee0656246d7012706dc64950dcec221
+  specs:
+    rolify (3.5.0)
+
+GIT
   remote: git://github.com/plataformatec/simple_form.git
   revision: 01ccfcebd45b8de0a6846d0f33b9daf74673dcc1
   branch: master
@@ -190,7 +196,6 @@ GEM
     rake (10.3.2)
     rdoc (4.1.1)
       json (~> 1.4)
-    rolify (3.4.0)
     rspec-core (3.0.2)
       rspec-support (~> 3.0.0)
     rspec-expectations (3.0.2)
@@ -282,7 +287,7 @@ DEPENDENCIES
   puma
   rails (~> 4.1.4)
   rails_12factor
-  rolify (~> 3.4.0)
+  rolify (~> 3.5)!
   rspec-rails
   sass-rails (~> 4.0.0)
   sdoc
