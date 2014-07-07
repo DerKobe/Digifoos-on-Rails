@@ -64,3 +64,4 @@ gem 'cancancan', '~> 1.8.0'
 gem 'gravatar_image_tag', '~> 1.2.0'
 gem 'awesome_print'
 gem 'newrelic_rpm', group: :development
+gem 'rack-timeout'
