@@ -34,7 +34,7 @@ gem 'pry-byebug'
 gem 'better_errors'
 gem 'binding_of_caller'
 gem 'foreman'
-gem 'rails_12factor', :group => :production
+gem 'rails_12factor', :group => :production, github: 'heroku/rails_12factor'
 gem 'rspec-rails', :group => [ :development, :test ]
 gem 'factory_girl_rails', :group => :test
 gem 'shoulda-matchers', :group => :test
