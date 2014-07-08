@@ -4,7 +4,7 @@
 
   - if @games.any?
     .all-games
-      %table.table.table-striped
+      %table.table.table-striped.table-hover
         %tbody
           - @games.each do |game|
             = date_indicator game

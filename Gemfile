@@ -14,7 +14,7 @@ gem 'turbolinks' # https://github.com/rails/turbolinks
 # gem 'therubyracer', platforms: :ruby
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.1.1'
+gem 'jbuilder', '~> 2.1.2'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
@@ -48,7 +48,7 @@ gem 'haml-rails'
 #gem 'has_scope', '~> 0.5.0'
 gem 'simple_form', :github => 'plataformatec/simple_form', :branch => 'master'
 gem 'kaminari', '~> 0.16.0'
-#gem 'friendly_id', '~> 5.0.0'
+gem 'friendly_id', '~> 5.0.1'
 #gem 'acts-as-taggable-on', '~> 3.2.6'
 #gem 'acts_as_list', '~> 0.4.0'
 #gem 'paranoia', '~> 2.0.0'

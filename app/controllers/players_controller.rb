@@ -9,11 +9,13 @@ class PlayersController < ApplicationController
     @players = @group.players.order('name')
   end
 
+  def show
+  end
+
   def new
     authorize! :update, @group
     @player = Player.new group: @group
   end
-
 
   def create
     authorize! :update, @group

@@ -1,5 +1,13 @@
+class ExceptGamesGroupsAndUsers
+  def self.matches?(request)
+    !%w[ /games /groups /users ].include?(request.fullpath)
+  end
+end
+
 Rails.application.routes.draw do
   devise_for :users
+
+  get '/:id', to: 'groups#show', constraints: ExceptGamesGroupsAndUsers
 
   resources :groups do
     resources :players

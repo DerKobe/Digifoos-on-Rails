@@ -11,4 +11,40 @@
     %li.active
       = @player.name
 
-%h1= @player.name
+#player
+  .row
+    .col-md-12
+      %h1= @player.name
+
+  .row
+    .col-md-3
+      %table.table.table-hover
+        %tbody
+          %tr.success.alert-success
+            %td
+              %span.title Games Won
+            %td.numbers
+              %span.absolute 12
+              %span.percentage 50%
+
+          %tr.danger.alert-danger
+            %td
+              %span.title Games Lost
+            %td.numbers
+              %span.absolute 12
+              %span.percentage 50%
+
+          %tr
+            %td Buddy FTW
+            %td= player_link 1
+
+          %tr
+            %td Big Spoon
+            %td= player_link 2
+
+          %tr
+            %td Little Spoon
+            %td= player_link 3
+
+    .col-md-9
+      %canvas#player-chart(width="700" height="400")
