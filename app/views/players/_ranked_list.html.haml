@@ -1,20 +1,23 @@
 .players
   - if @players.any?
     .list-group
-      - @players.each_with_index do |player, position|
-        = link_to group_player_path(current_group, player), class: 'list-group-item' do
-          .label.label-primary.pull-left
-            %span.number= position + 1
+      - position = 0
+      - @players.each do |player|
+        - if player.games_played > 0
+          - position += 1
+          = link_to group_player_path(current_group, player), class: 'list-group-item' do
+            .label.label-primary.pull-left
+              %span.number= position
 
-          - if position < 3
-            = fa_stacked_icon 'trophy inverse', base: 'circle', class: "trophy position-#{position}"
-            %span.name.with_trophy= player.name
-          - else
-            %span.name= player.name
+            - if position <= 3
+              = fa_stacked_icon 'trophy inverse', base: 'circle', class: "trophy position-#{position}"
+              %span.name.with_trophy= player.name
+            - else
+              %span.name= player.name
 
-          .label.label-success.pull-right
-            %span.text Points
-            %span.number= player.points
+            .label.label-success.pull-right
+              %span.text Points
+              %span.number= player.points
 
   - else
     .alert.alert-warning

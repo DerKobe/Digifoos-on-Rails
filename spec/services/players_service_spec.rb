@@ -30,18 +30,23 @@ RSpec.describe PlayersService do
 
         expect(result[0].goals).to be 5
         expect(result[0].points).to be 3
+        expect(result[0].games_played).to be 1
 
         expect(result[1].goals).to be 5
         expect(result[1].points).to be 3
+        expect(result[1].games_played).to be 1
 
         expect(result[2].goals).to be 0
         expect(result[2].points).to be 0
+        expect(result[2].games_played).to be 0
 
         expect(result[3].goals).to be 3
         expect(result[3].points).to be -3
+        expect(result[3].games_played).to be 1
 
         expect(result[4].goals).to be 3
         expect(result[4].points).to be -3
+        expect(result[4].games_played).to be 1
       end
 
       it 'example 2' do
@@ -54,18 +59,23 @@ RSpec.describe PlayersService do
 
         expect(result[0].goals).to be 12
         expect(result[0].points).to be 6
+        expect(result[0].games_played).to be 2
 
         expect(result[1].goals).to be 10
         expect(result[1].points).to be 0
+        expect(result[1].games_played).to be 2
 
         expect(result[2].goals).to be 10
         expect(result[2].points).to be 0
+        expect(result[2].games_played).to be 2
 
         expect(result[3].goals).to be 0
         expect(result[3].points).to be 0
+        expect(result[3].games_played).to be 0
 
         expect(result[4].goals).to be 8
         expect(result[4].points).to be -6
+        expect(result[4].games_played).to be 2
       end
 
     end

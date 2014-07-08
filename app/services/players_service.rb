@@ -5,8 +5,9 @@ module PlayersService
     GET_PLAYERS_QUERY = <<-SQL
                SELECT
                  players.*,
-                 COALESCE(SUM(teams.goals),  0) AS goals,
-                 COALESCE(SUM(teams.points), 0) AS points
+                 COALESCE(SUM(teams.goals), 0)  AS goals,
+                 COALESCE(SUM(teams.points), 0) AS points,
+                 (SELECT COUNT(*) FROM players_teams WHERE player_id=players.id) AS games_played
                FROM
                  players
                  LEFT JOIN players_teams ON players_teams.player_id = players.id
@@ -17,14 +18,15 @@ module PlayersService
                GROUP BY
                  players.id
                ORDER BY
-                 points DESC, goals DESC, players.id ASC
+                 points DESC, goals DESC, games_played DESC, players.id ASC
                LIMIT ?
     SQL
 
     def get_players_for(group, limit = 100)
       Player.find_by_sql([GET_PLAYERS_QUERY.trim, group.id, limit]).map do |player|
-        player.points = player['points']
-        player.goals  = player['goals']
+        player.points        = player['points']
+        player.goals         = player['goals']
+        player.games_played  = player['games_played']
         player
       end
     end
