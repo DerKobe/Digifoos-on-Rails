@@ -1,5 +1,5 @@
 class GroupsController < ApplicationController
-  skip_authorization_check :index
+  skip_authorization_check only: [:index]
 
   before_filter :current_group, only: [:show, :edit, :update, :destroy]
 
