@@ -48,23 +48,30 @@
 }
 
 #player {
-  table {
-    .title {
-      position: relative;
-      top: 5px;
+  h1 .badge {
+    padding: 6px 15px;
+    font-size: 33px;
+    margin-bottom: 20px;
+
+    &.plain {
+      color: #fff;
+      background-color: #333;
     }
 
-    .numbers {
-      .absolute {
-        font-size: 20px;
-        font-weight: bold;
-        margin-right: 10px;
-      }
+    a {
+      color: #fff;
 
-      .percentage {
-        position: relative;
-        top: -2px;
+      &:hover {
+        color: #428BC9;
+        text-decoration: none;
       }
+    }
+
+    .title {
+      font-size: 12px;
+      position: relative;
+      top: 0px;
+      left: -5px;
     }
   }
 }
