@@ -22,6 +22,19 @@ module PlayersService
                LIMIT ?
     SQL
 
+    SCORE_QUERY = <<-SQL
+               SELECT
+                 COALESCE(SUM(teams.points), 0) AS points
+               FROM
+                 players
+                 INNER JOIN players_teams ON players_teams.player_id = players.id
+                 INNER JOIN teams         ON teams.id = players_teams.team_id
+               WHERE
+                 players.id = %{player_id}
+               GROUP BY
+                 players.id
+    SQL
+
     def get_players_for(group, limit = 100)
       Player.find_by_sql([GET_PLAYERS_QUERY.trim, group.id, limit]).map do |player|
         player.points        = player['points']
@@ -35,5 +48,8 @@ module PlayersService
       ActiveRecord::Base.connection.execute("SELECT 1 FROM players_teams WHERE player_id = #{ActiveRecord::Base.connection.quote player_id} LIMIT 1").first.present?
     end
 
+    def get_score_for(player_id)
+      ActiveRecord::Base.connection.execute(SCORE_QUERY % { player_id: ActiveRecord::Base.connection.quote(player_id) }).first['points'].to_i
+    end
   end
 end
