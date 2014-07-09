@@ -49,7 +49,7 @@ module PlayersService
     end
 
     def get_score_for(player_id)
-      ActiveRecord::Base.connection.execute(SCORE_QUERY % { player_id: ActiveRecord::Base.connection.quote(player_id) }).first['points'].to_i
+      ActiveRecord::Base.connection.execute(SCORE_QUERY.trim % { player_id: ActiveRecord::Base.connection.quote(player_id) }).first['points'].to_i
     end
   end
 end

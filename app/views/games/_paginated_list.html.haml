@@ -15,11 +15,11 @@
                   ,&nbsp;
                   %span.player><= player_link teams[0].player_ids.last
                 %td.score
-                  %span{ class: winner_loser_class(teams[0]) }><= fa_icon 'star'
+                  = score_badge(teams[0])
                   .label.alert-info><= teams[0].goals
                   %span><= ':'
                   .label.alert-info><= teams[1].goals
-                  %span{ class: winner_loser_class(teams[1]) }><= fa_icon 'star'
+                  = score_badge(teams[1])
                 %td.team
                   %span.player><= player_link teams[1].player_ids.first
                   ,&nbsp;

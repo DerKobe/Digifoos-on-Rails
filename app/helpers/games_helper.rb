@@ -1,9 +1,13 @@
 module GamesHelper
 
-  def winner_loser_class(team)
-    winner_class = 'winner'
-    loser_class  = 'loser'
-    team.points > 0 ? winner_class : loser_class
+  def score_badge(team)
+    content_tag :div, class: "badge #{team.points > 0 ? 'alert-success' : 'alert-danger'}" do
+      if team.points > 0
+        "+#{team.points}"
+      else
+        team.points.to_s
+      end
+    end
   end
 
   def date_indicator(game)

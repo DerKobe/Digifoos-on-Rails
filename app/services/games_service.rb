@@ -8,6 +8,8 @@ module GamesService
     def finish_game(game)
       raise 'Game already finished' if game.finished?
 
+      binding.pry
+
       game.update status: :finished
 
       team1 = game.teams[0]
@@ -31,8 +33,8 @@ module GamesService
 
     private
 
-    def elo(ra, rb, team_won, f = 150)
-      ra + ( 15.0 * ( (team_won ? 1 : 0) - ( 1.0 / ( 1.0 + (10 ** ((rb - ra) / f )))))).to_i
+    def elo(ra, rb, team_won, f = 150.0)
+      (15 * ( (team_won ? 1.0 : 0.0) - ( 1.0 / ( 1.0 + (10 ** ((rb - ra) / f )))))).to_i
     end
 
     def score(team)
