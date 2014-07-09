@@ -12,6 +12,7 @@ addons:
 before_script:
 - psql -c 'create database digifoos_test;' -U postgres
 deploy:
+  app: digifoos
   provider: heroku
   api_key:
     secure: PKvOdI+CQSskyeK+ioUG9kAuyoOy0+inTRZnMOTR9Rsc92ONwbSeIbhzogKQI4dxOasvHPZBN03YAH/b1dxxf8fCveaLQWMWO+bChQlT5rSLCFRe1I0x7DVV1AWOA+YR6ux13euZmL6o8nyBjenR+1qyEJ7ep3zvMg/elqrxeO8=
