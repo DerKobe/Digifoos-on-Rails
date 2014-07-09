@@ -51,7 +51,12 @@ module PlayersService
 
     def get_full_stats_for(player_id)
       # dummy data
-      Stats.new 1, 21, 3.2, 12,6, 66.6, 33.3, 230, 198, 5.2, 3.6, Player.find(player_id).group.players.all.map(&:id).shuffle,Player.find(player_id).group.players.all.map(&:id).shuffle,Player.find(player_id).group.players.all.map(&:id).shuffle,[]
+      Stats.new(1, 21, 3.2, 12,6, 66.6, 33.3, 230, 198, 5.2, 3.6,
+                Player.find(player_id).group.players.all.map{|p| [p,rand(20)] }.shuffle,
+                Player.find(player_id).group.players.all.map{|p| [p,rand(20)] }.shuffle,
+                Player.find(player_id).group.players.all.map{|p| [p,rand(20)] }.shuffle,
+                []
+      )
     end
   end
 end
