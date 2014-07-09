@@ -10,10 +10,10 @@ environment ENV['RACK_ENV'] || 'development'
 # on_worker_boot do
 #   # worker specific setup
 #   ActiveSupport.on_load(:active_record) do
-#     config = if ENV['HEROKU_POSTGRESQL_MAUVE_URL'].present?
+#     config = if ENV['DATABASE_URL'].present?
 #                {
 #                    'adapter' => 'postgresql',
-#                    'url'     => ENV['HEROKU_POSTGRESQL_MAUVE_URL']
+#                    'url'     => ENV['DATABASE_URL']
 #                }
 #              else
 #                ActiveRecord::Base.configurations[Rails.env] || Rails.application.config.database_configuration[Rails.env]
@@ -24,3 +24,12 @@ environment ENV['RACK_ENV'] || 'development'
 #     ActiveRecord::Base.establish_connection(config.slice('adapter', 'pool', 'url'))
 #   end
 # end
+
+on_worker_boot do
+  # worker specific setup
+  ActiveSupport.on_load(:active_record) do
+    config = ActiveRecord::Base.configurations[Rails.env] || Rails.application.config.database_configuration[Rails.env]
+    config['pool'] = ENV['MAX_THREADS'] || 16
+    ActiveRecord::Base.establish_connection(config)
+  end
+end
