@@ -1,14 +1,14 @@
+.trophy {
+  position: relative;
+  top: 1px;
+
+  i { text-shadow: 0 -1px #999, 1px 0 #999, 0 1px #999, -1px 0 #999; }
+  &.position-1 i.fa-circle { color: #ffed2c; }
+  &.position-2 i.fa-circle { color: #dbdbdb; }
+  &.position-3 i.fa-circle { color: #ffa43f; }
+}
+
 .players {
-  .trophy {
-    position: relative;
-    top: 1px;
-
-    i { text-shadow: 0 -1px #999, 1px 0 #999, 0 1px #999, -1px 0 #999; }
-    &.position-1 i.fa-circle { color: #ffed2c; }
-    &.position-2 i.fa-circle { color: #dbdbdb; }
-    &.position-3 i.fa-circle { color: #ffa43f; }
-  }
-
   .name {
     height: 25px;
     display: inline-block;
@@ -48,30 +48,54 @@
 }
 
 #player {
-  h1 .badge {
-    padding: 6px 15px;
-    font-size: 33px;
-    margin-bottom: 20px;
-
-    &.plain {
-      color: #fff;
-      background-color: #333;
+  h1 {
+    .trophy {
+      font-size: 0.75em;
+      top: -2px;
     }
 
-    a {
-      color: #fff;
+    .badge {
+      padding: 6px 15px;
+      font-size: 33px;
+      margin-bottom: 20px;
 
-      &:hover {
-        color: #428BC9;
-        text-decoration: none;
+      &.plain {
+        color: #fff;
+        background-color: #333;
       }
-    }
 
-    .title {
-      font-size: 12px;
-      position: relative;
-      top: 0px;
-      left: -5px;
+      a {
+        color: #fff;
+
+        &:hover {
+          color: #428BC9;
+          text-decoration: none;
+        }
+      }
+
+      .prefix {
+        transform:         rotate(90deg);
+        -ms-transform:     rotate(90deg);
+        -webkit-transform: rotate(90deg);
+
+        display:     inline-block;
+        font-size:   11px;
+        position:    relative;
+        width:       10px;
+        font-weight: normal;
+
+        &.player { top: -19px; }
+        &.place  { top: -17px; }
+        &.score  { top: -18px; }
+        &.games  { top: -21px; }
+        &.goals  { top: -18px; }
+      }
+
+      .postfix {
+        font-size: 12px;
+        position: relative;
+        top: -14px;
+      }
     }
   }
 }

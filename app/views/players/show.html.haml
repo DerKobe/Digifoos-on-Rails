@@ -15,36 +15,42 @@
   .row
     .col-md-12
       %h1
+        - if @stats.place <= 3
+          = fa_stacked_icon 'trophy inverse', base: 'circle', class: "trophy position-#{@stats.place}"
+
         .badge.plain
+          %span.prefix.player Player
           = @player.name
 
-        -#.badge.alert-info
-          %span.title Position
-          = 1
-
         .badge.alert-info
-          %span.title Score
-          = PlayersService.get_score_for @player
+          %span.prefix.place Place
+          = @stats.place
 
-        -#.badge.alert-success
-          %span.title Games Won
-          12
+        .badge.alert-warning
+          %span.prefix.score Score
+          = @stats.score
+          %span.postfix= "Avg. #{@stats.score_avg}"
 
-        -#.badge.alert-danger
-          %span.title Games Lost
-          12
+        .badge.alert-success
+          %span.prefix.games Games
+          = @stats.games_won
+          %span.postfix= "#{@stats.games_won_percentage}%"
 
-        -#.badge.plain
-          %span.title Buddy FTW
-          = player_link 1
+        .badge.alert-danger
+          %span.prefix.games Games
+          = @stats.games_lost
+          %span.postfix= "#{@stats.games_lost_percentage}%"
 
-        -#.badge.plain
-          %span.title Big Spoon
-          = player_link 2
+        .badge.alert-success
+          %span.prefix.goals Goals
+          = @stats.goals_made
+          %span.postfix= "Avg. #{@stats.goals_made_average}"
 
-        -#.badge.plain
-          %span.title Little Spoon
-          = player_link 3
+        .badge.alert-danger
+          %span.prefix.goals Goals
+          = @stats.goals_against
+          %span.postfix= "Avg. #{@stats.goals_against_average}"
+
 
     -#.col-md-12
       %canvas#player-chart(width="700" height="400")
