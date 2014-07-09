@@ -27,7 +27,7 @@ RSpec.describe GamesService do
 
         GamesService.finish_game(game)
 
-        binding.pry
+        #binding.pry
       end
 
     end
