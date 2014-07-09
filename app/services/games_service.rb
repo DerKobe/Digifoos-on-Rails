@@ -8,8 +8,6 @@ module GamesService
     def finish_game(game)
       raise 'Game already finished' if game.finished?
 
-      binding.pry
-
       game.update status: :finished
 
       team1 = game.teams[0]
