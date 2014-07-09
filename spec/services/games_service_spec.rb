@@ -22,7 +22,7 @@ RSpec.describe GamesService do
         game
       end
 
-      it 'example 1' do
+      xit 'example 1' do
         game = create_game 0,1,2,3, 5,3
 
         GamesService.finish_game(game)
