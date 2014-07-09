@@ -52,5 +52,36 @@
           %span.postfix= "Avg. #{@stats.goals_against_average}"
 
 
-    -#.col-md-12
-      %canvas#player-chart(width="700" height="400")
+  .row
+    .buddy-ftw-ladder.col-md-4
+      .panel.panel-primary
+        .panel-heading
+          %span.pull-right Games Won Together
+          %h3.panel-title Buddy FTW
+        .list-group
+          - @stats.buddy_ftw.each do |player_id|
+            .list-group-item
+              .badge.alert-info 12
+              = player_link player_id
+
+    .little-spoon-ladder.col-md-4
+      .panel.panel-success
+        .panel-heading
+          %span.pull-right Games Won Against
+          %h3.panel-title Little Spoon
+        .list-group
+          - @stats.little_spoon.each do |player_id|
+            .list-group-item
+              .badge.alert-success 12
+              = player_link player_id
+
+    .big.spoon-ladder.col-md-4
+      .panel.panel-danger
+        .panel-heading
+          %span.pull-right Games Lost Against
+          %h3.panel-title Big Spoon
+        .list-group
+          - @stats.big_spoon.each do |player_id|
+            .list-group-item
+              .badge.alert-danger 12
+              = player_link player_id
