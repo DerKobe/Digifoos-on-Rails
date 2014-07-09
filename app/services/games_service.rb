@@ -15,11 +15,8 @@ module GamesService
 
       (winners, losers) = team1.goals > team2.goals ? [team1, team2] : [team2, team1]
 
-      diff_winners = elo(score(winners), score(losers), 1) - score(winners)
-      diff_losers  = elo(score(losers), score(winners), 0) - score(losers)
-
-      winners.update points: ( score(winners) + diff_winners )
-      losers.update  points: ( score(losers)  + diff_losers )
+      winners.update points: elo(score(winners), score(losers), true)
+      losers.update  points: elo(score(losers), score(winners), false)
     end
 
     def inc_goals(team_id)
@@ -34,8 +31,8 @@ module GamesService
 
     private
 
-    def elo(ra, rb, w, f = 150)
-      ra + ( 15 * ( w - ( 1 / ( 1 + (10 ** (rb - ra) / f ))))).to_i
+    def elo(ra, rb, team_won, f = 150)
+      ra + ( 15.0 * ( (team_won ? 1 : 0) - ( 1.0 / ( 1.0 + (10 ** ((rb - ra) / f )))))).to_i
     end
 
     def score(team)

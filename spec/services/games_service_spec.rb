@@ -22,14 +22,16 @@ RSpec.describe GamesService do
         game
       end
 
-      xit 'example 1' do
+      it 'example 1' do
         game = create_game 0,1,2,3, 5,3
 
         GamesService.finish_game(game)
 
-        #binding.pry
+        expect(game.teams.first.points).to be 7
+        expect(game.teams.last.points).to be -7
       end
 
+      # TODO more examples
     end
   end
 
