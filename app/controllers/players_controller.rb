@@ -10,7 +10,7 @@ class PlayersController < ApplicationController
   end
 
   def show
-    @stats = PlayersService.get_full_stats_for @player.id
+    @stats = PlayersService.get_full_stats_for @player
   end
 
   def new
