@@ -1,5 +1,5 @@
-.col-xs-3
+.col-xs-6
   %ul.chosen-players{ class: "chosen-players-#{current}" }
     - teams[current].players.each do |player|
       %li
-        %a(data-method="DELETE" data-remote="true"){ href: remove_player_game_path(@game, teams[current], player) }= player.name
+        %a.btn.btn-warning(data-method="DELETE" data-remote="true"){ href: remove_player_game_path(@game, teams[current], player) }= player.name

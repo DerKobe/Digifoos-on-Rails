@@ -7,9 +7,10 @@
     - @game.teams.order('teams.id ASC').tap do |teams|
       .row
         = render 'games/addable_players_list',    teams: teams, current: 0
+        = render 'games/addable_players_list',    teams: teams, current: 1
+      .row
         = render 'games/removeable_players_list', teams: teams, current: 0
         = render 'games/removeable_players_list', teams: teams, current: 1
-        = render 'games/addable_players_list',    teams: teams, current: 1
 
       .row.actions
         .col-md-12

@@ -64,20 +64,26 @@
 
     ul.available-players {
       list-style: none;
+
+      a {
+        width: 100%;
+      }
     }
 
     ul.chosen-players {
       list-style: none;
-      padding: 0;
-      font-size: 20px;
-    }
 
-    ul.available-players-0 {
-      text-align: left;
+      a {
+        font-size: 20px;
+        width: 100%;
+      }
+
+      &.chosen-players-1 {
+        padding: 0 40px 0 0;
+      }
     }
 
     ul.available-players-1 {
-      text-align: right;
       padding: 0 40px 0 0;
     }
 
