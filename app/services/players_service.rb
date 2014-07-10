@@ -71,21 +71,22 @@ module PlayersService
       stats         = ActiveRecord::Base.connection.execute(SCORE_QUERY.trim         % { player_id: ActiveRecord::Base.connection.quote(player.id) }).first
       goals_against = ActiveRecord::Base.connection.execute(GOALS_AGAINST_QUERY.trim % { player_id: ActiveRecord::Base.connection.quote(player.id) }).first['goals_against'].to_i
 
-      Stats.new(place,
-                stats['score'],
-                '%.1f' % (stats['score'].to_i / (stats['games_played'].to_i * 1.0)),
-                stats['games_won'].to_i,
-                stats['games_played'].to_i - stats['games_won'].to_i,
-                '%.1f' % (stats['games_won'].to_i / (stats['games_played'].to_i * 1.0)*100),
-                '%.1f' % ((stats['games_played'].to_i - stats['games_won'].to_i) / (stats['games_played'].to_i * 1.0)*100),
-                stats['goals_made'].to_i,
-                goals_against,
-                '%.1f' % (stats['goals_made'].to_i / (stats['games_played'].to_i * 1.0)),
-                '%.1f' % (goals_against / (stats['games_played'].to_i * 1.0)),
-                player.group.players.all.map{|p| [p,rand(20)] }.shuffle,
-                player.group.players.all.map{|p| [p,rand(20)] }.shuffle,
-                player.group.players.all.map{|p| [p,rand(20)] }.shuffle,
-                []
+      Stats.new(
+          place,
+          stats['score'],
+          '%.1f' % (stats['score'].to_i / (stats['games_played'].to_i * 1.0)),
+          stats['games_won'].to_i,
+          stats['games_played'].to_i - stats['games_won'].to_i,
+          '%.1f' % (stats['games_won'].to_i / (stats['games_played'].to_i * 1.0)*100),
+          '%.1f' % ((stats['games_played'].to_i - stats['games_won'].to_i) / (stats['games_played'].to_i * 1.0)*100),
+          stats['goals_made'].to_i,
+          goals_against,
+          '%.1f' % (stats['goals_made'].to_i / (stats['games_played'].to_i * 1.0)),
+          '%.1f' % (goals_against / (stats['games_played'].to_i * 1.0)),
+          player.group.players.all.map{|p| [p,rand(20)] }.shuffle,
+          player.group.players.all.map{|p| [p,rand(20)] }.shuffle,
+          player.group.players.all.map{|p| [p,rand(20)] }.shuffle,
+          []
       )
     end
   end

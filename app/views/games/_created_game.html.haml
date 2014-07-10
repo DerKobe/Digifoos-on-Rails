@@ -16,7 +16,7 @@
         .col-md-12
           - if @game.ready_to_play?
             .start
-              %a.btn.btn-primary.btn-lg(data-method="POST" data-remote="true"){ href: start_game_path(@game), 'data-disable-with' => spinner }
+              %a.btn.btn-primary.btn-lg.full-width(data-method="POST" data-remote="true"){ href: start_game_path(@game), 'data-disable-with' => spinner }
                 = fa_icon 'play'
                 Let's Roll!
 
