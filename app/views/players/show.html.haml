@@ -61,10 +61,10 @@
           %span.pull-right Games Won Together
           %h3.panel-title Buddy FTW
         .list-group
-          - @stats.buddy_ftw.each do |player, count|
-            = link_to group_player_path(current_group, player), class: 'list-group-item' do
-              = player.name
-              .badge.alert-info= count
+          - @stats.buddy_ftw.each do |data|
+            = link_to group_player_path(current_group, data['player_id']), class: 'list-group-item' do
+              = Player.find(data['player_id']).name
+              .badge.alert-info= data['number_of_games']
 
     .little-spoon-ladder.col-md-4
       .panel.panel-success
@@ -72,10 +72,10 @@
           %span.pull-right Games Won Against
           %h3.panel-title Little Spoon
         .list-group
-          - @stats.little_spoon.each do |player, count|
-            = link_to group_player_path(current_group, player), class: 'list-group-item' do
-              = player.name
-              .badge.alert-success= count
+          - @stats.little_spoon.each do |data|
+            = link_to group_player_path(current_group, data['player_id']), class: 'list-group-item' do
+              = Player.find(data['player_id']).name
+              .badge.alert-success= data['number_of_games']
 
     .big.spoon-ladder.col-md-4
       .panel.panel-danger
@@ -83,7 +83,7 @@
           %span.pull-right Games Lost Against
           %h3.panel-title Big Spoon
         .list-group
-          - @stats.big_spoon.each do |player, count|
-            = link_to group_player_path(current_group, player), class: 'list-group-item' do
-              = player.name
-              .badge.alert-danger= count
+          - @stats.big_spoon.each do |data|
+            = link_to group_player_path(current_group, data['player_id']), class: 'list-group-item' do
+              = Player.find(data['player_id']).name
+              .badge.alert-danger= data['number_of_games']
