@@ -50,3 +50,16 @@ a {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+body.title {
+  padding-top: 51px;
+  background-color: #111;
+
+  .navbar {
+    margin-bottom: 0;
+  }
+
+  img.title-image {
+    width: 100%;
+  }
+}

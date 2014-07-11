@@ -1,10 +1,22 @@
-.container
-  .page-header
-    %h2 Forgot your password?
+- content_for :breadcrumbs do
+  %ol.breadcrumb
+    %li
+      = link_to root_path do
+        = fa_icon 'home'
+    %li.active
+      Forgot your password?
 
-  = simple_form_for(resource, as: resource_name, url: password_path(resource_name), :wrapper => :horizontal_form, :wrapper_mappings => { :boolean => :horizontal_boolean }, :html => { :class => 'form-horizontal', :role => 'form', :method => :post }) do |f|
-    = f.input :login, :required => true, :autofocus => true
+.row
+  .col-md-3
+  .col-md-6
+    .panel.panel-primary
+      .panel-heading
+        %h3.panel-title Forgot your password?
 
-    .form-group
-      .col-sm-offset-3.col-sm-9
-        = f.button :submit, "Send me reset password instructions"
+      .panel-body
+        = simple_form_for(resource, as: resource_name, url: password_path(resource_name), :wrapper => :horizontal_form, :wrapper_mappings => { :boolean => :horizontal_boolean }, :html => { :class => 'form-horizontal', :role => 'form', :method => :post }) do |f|
+          = f.input :login, :required => true, :autofocus => true
+
+          .form-group
+            .col-sm-offset-3.col-sm-9
+              = f.button :submit, "Send me reset password instructions"

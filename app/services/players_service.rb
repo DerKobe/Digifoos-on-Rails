@@ -1,7 +1,7 @@
 module PlayersService
   using SqlTrimmer
 
-  class Stats < Struct.new(:place, :score, :score_avg, :games_won, :games_lost, :games_won_percentage, :games_lost_percentage, :goals_made, :goals_against, :goals_made_average, :goals_against_average, :buddy_ftw, :big_spoon, :little_spoon, :scores); end
+  class Stats < Struct.new(:place, :score, :games_played, :games_won, :games_lost, :games_won_percentage, :games_lost_percentage, :goals_made, :goals_against, :goals_made_average, :goals_against_average, :buddy_ftw, :big_spoon, :little_spoon, :scores); end
   
   class << self
     GET_PLAYERS_QUERY = <<-SQL
@@ -114,7 +114,7 @@ module PlayersService
       Stats.new(
           place,
           stats['score'],
-          '%.1f' % (stats['score'].to_i / (stats['games_played'].to_i * 1.0)),
+          stats['games_played'].to_i,
           stats['games_won'].to_i,
           stats['games_played'].to_i - stats['games_won'].to_i,
           '%.1f' % (stats['games_won'].to_i / (stats['games_played'].to_i * 1.0)*100),

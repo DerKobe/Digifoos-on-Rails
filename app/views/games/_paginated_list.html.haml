@@ -1,4 +1,8 @@
 .games
+  - unless @games.any?
+    .alert.alert-warning
+      No games found.
+
   .open-game
     = render "games/#{@game.try(:status) || 'start' }_game"
 
@@ -28,7 +32,3 @@
                   %span.player><= player_link teams[1].player_ids.last
 
       = paginate @games
-
-  - else
-    .alert.alert-warning
-      No games found.
