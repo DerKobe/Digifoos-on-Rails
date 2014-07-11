@@ -46,6 +46,14 @@ class Game < ActiveRecord::Base
     teams.sort_by{|t| t.id }
   end
 
+  def winners
+    teams[0].goals > teams[1].goals ? teams[0] : teams[1]
+    end
+
+  def losers
+    (teams - [winners]).first
+  end
+
   # protected instance methods .................................................
   protected
 

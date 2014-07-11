@@ -10,13 +10,8 @@ module GamesService
 
       game.update status: :finished
 
-      team1 = game.teams[0]
-      team2 = game.teams[1]
-
-      (winners, losers) = team1.goals > team2.goals ? [team1, team2] : [team2, team1]
-
-      winners.update points: elo(score(winners), score(losers), true)
-      losers.update  points: elo(score(losers), score(winners), false)
+      game.winners.update points: elo(score(game.winners), score(game.losers),  true)
+      game.losers.update  points: elo(score(game.losers),  score(game.winners), false)
     end
 
     def inc_goals(team_id)
