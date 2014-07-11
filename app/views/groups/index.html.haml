@@ -11,7 +11,7 @@
   - if @groups.any?
     .list-group
       - @groups.each do |group|
-        = link_to group_path(group), class: 'list-group-item' do
+        = link_to "/#{group.slug}", class: 'list-group-item' do
           %span.name= group.name
           %span.stats.pull-right
             = group_stats(group)
