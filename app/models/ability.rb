@@ -17,11 +17,13 @@ class Ability
     can :read, Group
     can :crud, Group,  user: user
 
+    can :manage_games, Group, user: user
+    can :manage_games, Group, users: { id: user.id }
+
     can :read, Player
     can :crud, Player, user: user # through association
 
-    can :read,   Game
-    can :update, Game, user: user # through association
+    can :read, Game
   end
 
   # protected instance methods .................................................

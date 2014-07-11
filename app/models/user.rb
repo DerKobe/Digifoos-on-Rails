@@ -6,14 +6,11 @@ class User < ActiveRecord::Base
   has_many :groups, dependent: :destroy
   has_many :players, through: :groups
 
+  has_and_belongs_to_many :shared_groups, class: 'Group'
+
   # scopes .....................................................................
   # validations ................................................................
-  validates :username,
-            :presence => true,
-            :length => { :maximum => 255 },
-            :uniqueness => {
-              :case_sensitive => false
-            }
+  validates :username, presence: true, length: { maximum: 255 }, uniqueness: { case_sensitive: false }
 
   # callbacks ..................................................................
   # additional config ..........................................................

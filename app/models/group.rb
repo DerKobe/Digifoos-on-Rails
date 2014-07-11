@@ -5,9 +5,12 @@ class Group < ActiveRecord::Base
 
   # constants ..................................................................
   # associations ...............................................................
+  belongs_to :user # author
+
   has_many :games, dependent: :destroy
   has_many :players, dependent: :destroy
-  belongs_to :user
+
+  has_and_belongs_to_many :users # shared groups
 
   # scopes .....................................................................
   # validations ................................................................

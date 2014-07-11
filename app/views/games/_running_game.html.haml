@@ -15,7 +15,7 @@
         = player_link teams[1].player_ids[0]
         = player_link teams[1].player_ids[1]
 
-    - if can? :update, @game
+    - if can? :manage_games, @group
       .running-game-controls
         .row
           .team1.col-xs-5
@@ -30,7 +30,7 @@
               - if teams[1].goals < 7
                 %a.btn.btn-lg.btn-success(data-method="POST" data-remote="true"){ href: inc_goals_game_path(@game, teams[1]) }= fa_icon 'plus'
 
-  - if can? :update, @game
+  - if can? :manage_games, @group
     .row.actions
       .col-md-12
         .finish

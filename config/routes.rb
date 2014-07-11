@@ -14,6 +14,9 @@ Rails.application.routes.draw do
 
     member do
       post 'games', to: 'games#create', as: :create_game
+
+      post   'users/:user_id' => 'managers#add',    as: 'add_manager'
+      delete 'users/:user_id' => 'managers#remove', as: 'remove_manager'
     end
   end
 

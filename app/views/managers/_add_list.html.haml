@@ -1,0 +1,13 @@
+.add-list
+  - if (User.all - @group.users - [current_user]).any?
+    .panel.panel-primary
+      .panel-heading
+        .panel-title Add Managers
+      .panel-body
+        %ul.list-group
+          - (User.all - @group.users - [current_user]).each do |user|
+            %li.list-group-item
+              = user.username
+              .btn-group.pull-right
+                = link_to remove_manager_group_path(current_group, user), class: 'btn btn-sm btn-primary', data: { method: 'post', remote: true } do
+                  = fa_icon 'plus', text: 'Add'

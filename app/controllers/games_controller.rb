@@ -69,7 +69,7 @@ class GamesController < ApplicationController
 
   def load_and_authorize_group
     @group = @game ? @game.group : Group.find(params[:id])
-    authorize! :update, @group
+    authorize! :manage_games, @group
   end
 
   def player_operation
