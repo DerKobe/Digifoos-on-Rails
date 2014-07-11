@@ -14,21 +14,22 @@
           Edit
 
 .row
-  .col-md-6
+  .col-md-4
     %h2 Change Group Name
     = simple_form_for @group, url: group_path(@group), method: :patch do |f|
       = f.error_notification
       = f.input :name, placeholder: 'Name', label: false
       = f.button :submit, class: 'btn-primary', value: 'Save Changes'
 
-    %hr
-    %h2 Danger Zone!
-    = simple_form_for @group, url: group_path(@group), method: :delete do |f|
-      = f.button :submit, class: 'btn-danger', value: "CAUTION!!! Delete #{@group.name} with all games and players", onclick: 'return confirm("Are you sure?");'
-
-  .col-md-6
-    %h2 Add or Remove Managers
+  .col-md-4
+    %h2 Managers
     %p Managers can start and cancel games but can not add or edit players or delete or edit the group.
 
     = render 'managers/add_list'
     = render 'managers/remove_list'
+
+  .col-md-4
+    %h2 Danger Zone!
+    %p When deleting a group all of it's games and players are irreversibly lost. Act with extreme caution!
+    = simple_form_for @group, url: group_path(@group), method: :delete do |f|
+      = f.button :submit, class: 'btn-danger', value: "Delete #{@group.name}", onclick: 'return confirm("Are you sure?");'

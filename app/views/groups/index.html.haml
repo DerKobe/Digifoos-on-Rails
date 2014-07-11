@@ -7,18 +7,33 @@
     %li.active><
       Groups
 
-.groups-index
-  - if @groups.any?
-    .list-group
-      - @groups.each do |group|
-        = link_to "/#{group.slug}", class: 'list-group-item' do
-          %span.name= group.name
-          %span.stats.pull-right
-            = group_stats(group)
+.row
+  .col-md-12
+    %h2 My Groups
+    .groups-index
+      - if @groups.any?
+        .list-group
+          - @groups.each do |group|
+            = link_to "/#{group.slug}", class: 'list-group-item' do
+              %span.name= group.name
+              %span.stats.pull-right
+                = group_stats(group)
 
-  - else
-    .alert.alert-info
-      No groups created, yet.
+      - else
+        .alert.alert-info
+          You have no groups created, yet.
 
-  %a.btn.btn-primary{ href: new_group_path }
-    = fa_icon 'plus', text: 'Add New Group'
+      %a.btn.btn-primary{ href: new_group_path }
+        = fa_icon 'plus', text: 'Add New Group'
+
+- if current_user.managed_groups.any?
+  .row
+    .col-md-12
+      %h2 Managed Groups
+      .groups-index
+        .list-group
+          - current_user.managed_groups.each do |group|
+            = link_to "/#{group.slug}", class: 'list-group-item' do
+              %span.name= group.name
+              %span.stats.pull-right
+                = group_stats(group)

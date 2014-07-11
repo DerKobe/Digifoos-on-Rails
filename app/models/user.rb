@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   has_many :groups, dependent: :destroy
   has_many :players, through: :groups
 
-  has_and_belongs_to_many :shared_groups, class: 'Group'
+  has_and_belongs_to_many :managed_groups, class_name: 'Group'
 
   # scopes .....................................................................
   # validations ................................................................
