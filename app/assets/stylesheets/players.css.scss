@@ -9,6 +9,10 @@
 }
 
 .players {
+  .list-group {
+    margin-bottom: 0;
+  }
+
   .name {
     height: 25px;
     display: inline-block;
