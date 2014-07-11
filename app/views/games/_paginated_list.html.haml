@@ -12,7 +12,8 @@
               %tr
                 %td.team
                   %span.player><= player_link teams[0].player_ids.first
-                  ,&nbsp;
+                  %span.comma ,
+                  %br
                   %span.player><= player_link teams[0].player_ids.last
                 %td.score
                   = score_badge(teams[0])
@@ -22,7 +23,8 @@
                   = score_badge(teams[1])
                 %td.team
                   %span.player><= player_link teams[1].player_ids.first
-                  ,&nbsp;
+                  %span.comma ,
+                  %br
                   %span.player><= player_link teams[1].player_ids.last
 
       = paginate @games

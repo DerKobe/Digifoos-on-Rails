@@ -45,3 +45,8 @@ body {
 .full-width {
   width: 100%;
 }
+
+a {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

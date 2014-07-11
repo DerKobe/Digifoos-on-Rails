@@ -7,8 +7,17 @@
 }
 
 .games {
-  .all-games table td {
-    text-align: center;
+  .all-games table {
+    table-layout: fixed;
+
+    td {
+      text-align: center;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      vertical-align: middle;
+
+      br { display: none; }
+    }
   }
 
   .team1 {
@@ -64,10 +73,6 @@
 
     ul.available-players {
       list-style: none;
-
-      a {
-        width: 100%;
-      }
     }
 
     ul.chosen-players {
@@ -75,7 +80,6 @@
 
       a {
         font-size: 20px;
-        width: 100%;
       }
 
       &.chosen-players-1 {
@@ -114,11 +118,11 @@
     }
 
     .team {
-      width: 35%;
+      //width: 35%;
     }
 
     .score {
-      width: 30%;
+      //width: 30%;
 
       .label {
         margin: 0 2px;
@@ -148,10 +152,25 @@
 }
 
 @media (max-width: 480px) {
-  .games .all-games {
-    .winner,
-    .loser {
-      display: none;
+  .games {
+    .all-games table td {
+      br { display: block; }
+      .badge { display: none; }
+      span.comma { display: none; }
+    }
+
+    .created-game {
+      ul.chosen-players {
+        a {
+          font-size: 15px;
+        }
+      }
+    }
+
+    .running-game {
+      .running-game-controls a {
+        padding: 15px;
+      }
     }
   }
 }
