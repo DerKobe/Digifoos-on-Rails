@@ -18,72 +18,16 @@
         - if @stats.place <= 3
           = fa_stacked_icon 'trophy inverse', base: 'circle', class: "trophy position-#{@stats.place}"
 
-        .badge.plain
-          %span.prefix.player Player
-          = @player.name
-
+        = big_badge 'plain',   @player.name,         'Player'
         %br
-
-        .badge.alert-info
-          %span.prefix.place Place
-          = @stats.place
-
-        .badge.alert-warning
-          %span.prefix.score Score
-          = @stats.score
-          %span.postfix= "#{@stats.games_played} gp"
-
-        .badge.alert-success
-          %span.prefix.games Games
-          = @stats.games_won
-          %span.postfix= "#{@stats.games_won_percentage}%"
-
-        .badge.alert-danger
-          %span.prefix.games Games
-          = @stats.games_lost
-          %span.postfix= "#{@stats.games_lost_percentage}%"
-
-        .badge.alert-success
-          %span.prefix.goals Goals
-          = @stats.goals_made
-          %span.postfix= "Avg. #{@stats.goals_made_average}"
-
-        .badge.alert-danger
-          %span.prefix.goals Goals
-          = @stats.goals_against
-          %span.postfix= "Avg. #{@stats.goals_against_average}"
-
+        = big_badge 'info',    @stats.place,         'Place'
+        = big_badge 'warning', @stats.score,         'Score', "#{@stats.games_played} gp"
+        = big_badge 'success', @stats.games_won,     'Games', "#{@stats.games_won_percentage}%"
+        = big_badge 'danger',  @stats.games_lost,    'Games', "#{@stats.games_lost_percentage}%"
+        = big_badge 'success', @stats.goals_made,    'Goals', "#{@stats.goals_made_average}%"
+        = big_badge 'danger',  @stats.goals_against, 'Goals', "#{@stats.goals_against_average}%"
 
   .row
-    .buddy-ftw-ladder.col-md-4
-      .panel.panel-primary
-        .panel-heading
-          %span.pull-right Games Won Together
-          %h3.panel-title Buddy FTW
-        .list-group
-          - @stats.buddy_ftw.each do |data|
-            = link_to group_player_path(current_group, data['player_id']), class: 'list-group-item' do
-              = Player.find(data['player_id']).name
-              .badge.alert-info= data['number_of_games']
-
-    .little-spoon-ladder.col-md-4
-      .panel.panel-success
-        .panel-heading
-          %span.pull-right Games Won Against
-          %h3.panel-title Little Spoon
-        .list-group
-          - @stats.little_spoon.each do |data|
-            = link_to group_player_path(current_group, data['player_id']), class: 'list-group-item' do
-              = Player.find(data['player_id']).name
-              .badge.alert-success= data['number_of_games']
-
-    .big.spoon-ladder.col-md-4
-      .panel.panel-danger
-        .panel-heading
-          %span.pull-right Games Lost Against
-          %h3.panel-title Big Spoon
-        .list-group
-          - @stats.big_spoon.each do |data|
-            = link_to group_player_path(current_group, data['player_id']), class: 'list-group-item' do
-              = Player.find(data['player_id']).name
-              .badge.alert-danger= data['number_of_games']
+    = render 'players/players_panel', title: 'Buddy FTW',    subtitle: 'Games Won Together', color: :blue,  players: @stats.buddy_ftw
+    = render 'players/players_panel', title: 'Little Spoon', subtitle: 'Games Won Against',  color: :green, players: @stats.little_spoon
+    = render 'players/players_panel', title: 'Big Spoon',    subtitle: 'Games Lost Against', color: :red,   players: @stats.big_spoon
