@@ -24,8 +24,8 @@
         = big_badge 'warning', @stats.score,         'Score', "#{@stats.games_played} gp"
         = big_badge 'success', @stats.games_won,     'Games', "#{@stats.games_won_percentage}%"
         = big_badge 'danger',  @stats.games_lost,    'Games', "#{@stats.games_lost_percentage}%"
-        = big_badge 'success', @stats.goals_made,    'Goals', "#{@stats.goals_made_average}%"
-        = big_badge 'danger',  @stats.goals_against, 'Goals', "#{@stats.goals_against_average}%"
+        = big_badge 'success', @stats.goals_made,    'Goals', "Avg #{@stats.goals_made_average}"
+        = big_badge 'danger',  @stats.goals_against, 'Goals', "Avg #{@stats.goals_against_average}"
 
   .row
     = render 'players/players_panel', title: 'Buddy FTW',    subtitle: 'Games Won Together', color: :blue,  players: @stats.buddy_ftw
