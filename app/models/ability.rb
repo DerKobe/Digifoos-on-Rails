@@ -22,8 +22,6 @@ class Ability
 
     can :read, Player
     can :crud, Player, user: user # through association
-
-    can :read, Game
   end
 
   # protected instance methods .................................................

@@ -9,7 +9,7 @@
         %li
           = link_to fa_icon('home'), root_path
         %li
-          = link_to @group.name, group_path(@group)
+          = link_to @group.name, "/#{@group.slug}"
         %li.active
           Edit
 

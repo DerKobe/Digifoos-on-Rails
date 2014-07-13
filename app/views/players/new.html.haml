@@ -9,7 +9,7 @@
         %li
           = link_to fa_icon('home'), root_path
         %li.active
-          = link_to current_group.name, group_path(current_group)
+          = link_to @group.name, "/#{@group.slug}"
         %li.active
           New Player
 

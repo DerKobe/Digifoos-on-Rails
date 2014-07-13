@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
-  load_resource except: :create
+  load_resource except: [:create, :destroy_last_game]
   before_filter :load_and_authorize_group
 
   # POST /groups/:group_id/games
@@ -14,6 +14,12 @@ class GamesController < ApplicationController
     end
 
     render 'open_game'
+  end
+
+  # DELETE /games/:group_id/games
+  def destroy_last_game
+    @group.games.order('created_at DESC').limit(1).first.destroy!
+    redirect_to "/#{@group.slug}"
   end
 
   # POST /games/:id/start

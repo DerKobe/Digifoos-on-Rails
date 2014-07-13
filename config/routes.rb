@@ -13,7 +13,8 @@ Rails.application.routes.draw do
     resources :players
 
     member do
-      post 'games', to: 'games#create', as: :create_game
+      post   'games', to: 'games#create',            as: :create_game
+      delete 'games', to: 'games#destroy_last_game', as: :destroy_game
 
       post   'users/:user_id' => 'managers#add',    as: 'add_manager'
       delete 'users/:user_id' => 'managers#remove', as: 'remove_manager'

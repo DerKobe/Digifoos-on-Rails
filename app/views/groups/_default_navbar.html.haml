@@ -1,5 +1,5 @@
-- if can? :update, @group
-  - content_for :navbar do
+- content_for :navbar do
+  - if can? :update, @group
     %li
       %a{ href: group_players_path(@group) }
         = fa_icon 'users', text: 'Players'
@@ -7,3 +7,8 @@
     %li
       %a{ href: edit_group_path(@group) }
         = fa_icon 'cog', text: 'Edit Group'
+
+  - if can? :manage_games, @group
+    %li
+      %a(data-method="DELETE" data-confirm="Do you realy want to delete the last game? This action cannot be undone!"){ href: destroy_game_group_path(@group), 'data-disable-with' => spinner }
+        = fa_icon 'trash-o', text: 'Delete Last Game'
