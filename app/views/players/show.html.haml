@@ -28,7 +28,7 @@
         = big_badge 'danger',  @stats.goals_against, 'Goals', "Avg #{@stats.goals_against_average}"
 
   .row
-    = render 'players/players_panel', title: 'Buddy FTW',    subtitle: 'Games Won Together',  color: :blue,   players: @stats.buddy_ftw
-    = render 'players/players_panel', title: 'Banana Buddy', subtitle: 'Games Lost Together', color: :yellow, players: @stats.banana_buddy
-    = render 'players/players_panel', title: 'Little Spoon', subtitle: 'Games Won Against',   color: :green,  players: @stats.little_spoon
-    = render 'players/players_panel', title: 'Big Spoon',    subtitle: 'Games Lost Against',  color: :red,    players: @stats.big_spoon
+    = render 'players/players_panel', title: 'Buddy FTW',    subtitle: 'Won Together',  color: :blue,   players: @stats.buddy_ftw
+    = render 'players/players_panel', title: 'Banana Buddy', subtitle: 'Lost Together', color: :yellow, players: @stats.banana_buddy
+    = render 'players/players_panel', title: 'Little Spoon', subtitle: 'Won Against',   color: :green,  players: @stats.little_spoon
+    = render 'players/players_panel', title: 'Big Spoon',    subtitle: 'Lost Against',  color: :red,    players: @stats.big_spoon
