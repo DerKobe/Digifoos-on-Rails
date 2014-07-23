@@ -60,7 +60,7 @@ gem 'thread_safe', '~> 0.3.4'
 #gem 'sitemap_generator', '~> 5.0.3'
 gem 'devise', '~> 3.2.4'
 gem 'rolify', '~> 3.5', github: 'RolifyCommunity/rolify'
-gem 'cancancan', '~> 1.8.0'
+gem 'cancancan', '~> 1.9'
 gem 'gravatar_image_tag', '~> 1.2.0'
 gem 'awesome_print'
 gem 'newrelic_rpm', group: :development
