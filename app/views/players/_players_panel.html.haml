@@ -1,5 +1,5 @@
-.col-md-4
-  .panel{ class: "panel-#{{blue: 'primary', red: 'danger', green: 'success' }[color]}" }
+.col-md-3
+  .panel{ class: "panel-#{{blue: 'primary', red: 'danger', green: 'success', yellow: 'warning' }[color]}" }
     .panel-heading
       %span.pull-right= subtitle
       %h3.panel-title= title
@@ -7,4 +7,4 @@
       - players.each do |data|
         = link_to group_player_path(current_group, data['player_id']), class: 'list-group-item' do
           = Player.find(data['player_id']).name
-          .badge{ class: "alert-#{{ blue: 'info', red: 'danger', green: 'success' }[color]}" }= data['number_of_games']
+          .badge{ class: "alert-#{{ blue: 'info', red: 'danger', green: 'success', yellow: 'warning' }[color]}" }= data['number_of_games']

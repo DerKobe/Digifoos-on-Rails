@@ -1,7 +1,7 @@
 module PlayersService
   using SqlTrimmer
 
-  class Stats < Struct.new(:place, :score, :games_played, :games_won, :games_lost, :games_won_percentage, :games_lost_percentage, :goals_made, :goals_against, :goals_made_average, :goals_against_average, :buddy_ftw, :big_spoon, :little_spoon, :scores); end
+  class Stats < Struct.new(:place, :score, :games_played, :games_won, :games_lost, :games_won_percentage, :games_lost_percentage, :goals_made, :goals_against, :goals_made_average, :goals_against_average, :buddy_ftw, :banana_buddy, :big_spoon, :little_spoon, :scores); end
   
   class << self
     GET_PLAYERS_QUERY = <<-SQL
@@ -48,7 +48,7 @@ module PlayersService
                  teams.id NOT IN (SELECT team_id FROM players_teams WHERE player_id = %{player_id})
     SQL
 
-    BUDDY_FTW_QUERY = <<-SQL
+    BUDDY_QUERY = <<-SQL
                SELECT
                  players_teams.player_id,
                  COUNT(teams.id) AS number_of_games
@@ -58,7 +58,7 @@ module PlayersService
                WHERE
                  teams.id IN (SELECT team_id FROM players_teams WHERE player_id = %{player_id})
                  AND
-                 teams.points > 0
+                 teams.points %{comp} 0
                GROUP BY
                  players_teams.player_id
                ORDER BY
@@ -105,11 +105,12 @@ module PlayersService
     def get_full_stats_for(player)
       place = get_players_for(player.group).index(player) + 1
 
-      stats         = ActiveRecord::Base.connection.execute(SCORE_QUERY.trim         % { player_id: ActiveRecord::Base.connection.quote(player.id) }).first
-      goals_against = ActiveRecord::Base.connection.execute(GOALS_AGAINST_QUERY.trim % { player_id: ActiveRecord::Base.connection.quote(player.id) }).first['goals_against'].to_i
-      buddy_ftw     = ActiveRecord::Base.connection.execute(BUDDY_FTW_QUERY.trim     % { player_id: ActiveRecord::Base.connection.quote(player.id) }).to_a
-      little_spoon  = ActiveRecord::Base.connection.execute(SPOON_QUERY.trim         % { player_id: ActiveRecord::Base.connection.quote(player.id), comp: '>' }).to_a
-      big_spoon     = ActiveRecord::Base.connection.execute(SPOON_QUERY.trim         % { player_id: ActiveRecord::Base.connection.quote(player.id), comp: '<' }).to_a
+      stats         = execute(SCORE_QUERY.trim         % { player_id: quote(player.id) }).first
+      goals_against = execute(GOALS_AGAINST_QUERY.trim % { player_id: quote(player.id) }).first['goals_against'].to_i
+      buddy_ftw     = execute(BUDDY_QUERY.trim         % { player_id: quote(player.id), comp: '>' }).to_a
+      banana_budy   = execute(BUDDY_QUERY.trim         % { player_id: quote(player.id), comp: '<' }).to_a
+      little_spoon  = execute(SPOON_QUERY.trim         % { player_id: quote(player.id), comp: '>' }).to_a
+      big_spoon     = execute(SPOON_QUERY.trim         % { player_id: quote(player.id), comp: '<' }).to_a
 
       Stats.new(
           place,
@@ -124,10 +125,16 @@ module PlayersService
           '%.1f' % (stats['goals_made'].to_i / (stats['games_played'].to_i * 1.0)),
           '%.1f' % (goals_against / (stats['games_played'].to_i * 1.0)),
           buddy_ftw,
+          banana_budy,
           little_spoon,
           big_spoon,
           []
       )
     end
+
+    private
+
+    def execute(*args) ActiveRecord::Base.connection.execute *args  end
+    def quote(*args)   ActiveRecord::Base.connection.quote   *args  end
   end
 end
