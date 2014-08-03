@@ -100,22 +100,22 @@ module PlayersService
     end
 
     def played_already?(player_id)
-      ActiveRecord::Base.connection.execute("SELECT 1 FROM players_teams WHERE player_id = #{ActiveRecord::Base.connection.quote player_id} LIMIT 1").first.present?
+      ActiveRecord::Base.connection.execute("SELECT 1 FROM players_teams WHERE player_id = #{player_id} LIMIT 1").first.present?
     end
 
     def get_score_for(player_id)
-      ActiveRecord::Base.connection.execute(SCORE_QUERY % { player_id: ActiveRecord::Base.connection.quote(player_id) }).first['score'].to_i
+      ActiveRecord::Base.connection.execute(SCORE_QUERY % { player_id: player_id }).first['score'].to_i
     end
 
     def get_full_stats_for(player)
       place = get_players_for(player.group).index(player) + 1
 
-      stats         = execute(SCORE_QUERY         % { player_id: quote(player.id) }).first
-      goals_against = execute(GOALS_AGAINST_QUERY % { player_id: quote(player.id) }).first['goals_against'].to_i
-      buddy_ftw     = execute(BUDDY_QUERY         % { player_id: quote(player.id), comp: '>' }).to_a
-      banana_budy   = execute(BUDDY_QUERY         % { player_id: quote(player.id), comp: '<' }).to_a
-      little_spoon  = execute(SPOON_QUERY         % { player_id: quote(player.id), comp: '>' }).to_a
-      big_spoon     = execute(SPOON_QUERY         % { player_id: quote(player.id), comp: '<' }).to_a
+      stats         = execute(SCORE_QUERY         % { player_id: player.id }).first
+      goals_against = execute(GOALS_AGAINST_QUERY % { player_id: player.id }).first['goals_against'].to_i
+      buddy_ftw     = execute(BUDDY_QUERY         % { player_id: player.id, comp: '>' }).to_a
+      banana_budy   = execute(BUDDY_QUERY         % { player_id: player.id, comp: '<' }).to_a
+      little_spoon  = execute(SPOON_QUERY         % { player_id: player.id, comp: '>' }).to_a
+      big_spoon     = execute(SPOON_QUERY         % { player_id: player.id, comp: '<' }).to_a
 
       Stats.new(
           place,
@@ -140,6 +140,5 @@ module PlayersService
     private
 
     def execute(*args) ActiveRecord::Base.connection.execute *args  end
-    def quote(*args)   ActiveRecord::Base.connection.quote   *args  end
   end
 end
