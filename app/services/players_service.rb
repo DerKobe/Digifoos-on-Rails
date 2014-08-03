@@ -8,7 +8,7 @@ module PlayersService
                SELECT
                  players.*,
                  COALESCE(SUM(teams.goals), 0)  AS goals,
-                 COALESCE(SUM(teams.points), 0) AS points,
+                 SUM(teams.points) AS points,
                  (SELECT COUNT(*) FROM players_teams WHERE player_id=players.id) AS games_played
                FROM
                  players
@@ -16,13 +16,14 @@ module PlayersService
                  LEFT JOIN teams         ON teams.id = players_teams.team_id
                  LEFT JOIN games         ON teams.game_id = games.id
                WHERE
-                 players.group_id = ?
+                 players.group_id = ? AND points IS NOT NULL
                GROUP BY
                  players.id
                ORDER BY
                  points DESC, goals DESC, games_played DESC, players.id ASC
                LIMIT ?
     SQL
+    .trim
 
     SCORE_QUERY = <<-SQL
                SELECT
@@ -35,6 +36,7 @@ module PlayersService
                WHERE
                  players_teams.player_id = %{player_id}
     SQL
+    .trim
 
     GOALS_AGAINST_QUERY = <<-SQL
                SELECT
@@ -47,6 +49,7 @@ module PlayersService
                  AND
                  teams.id NOT IN (SELECT team_id FROM players_teams WHERE player_id = %{player_id})
     SQL
+    .trim
 
     BUDDY_QUERY = <<-SQL
                SELECT
@@ -64,6 +67,7 @@ module PlayersService
                ORDER BY
                  number_of_games DESC
     SQL
+    .trim
 
     SPOON_QUERY = <<-SQL
                SELECT
@@ -84,9 +88,10 @@ module PlayersService
                ORDER BY
                  number_of_games DESC
     SQL
+    .trim
 
     def get_players_for(group, limit = 100)
-      Player.find_by_sql([GET_PLAYERS_QUERY.trim, group.id, limit]).map do |player|
+      Player.find_by_sql([GET_PLAYERS_QUERY, group.id, limit]).map do |player|
         player.points        = player['points']
         player.goals         = player['goals']
         player.games_played  = player['games_played']
@@ -99,18 +104,18 @@ module PlayersService
     end
 
     def get_score_for(player_id)
-      ActiveRecord::Base.connection.execute(SCORE_QUERY.trim % { player_id: ActiveRecord::Base.connection.quote(player_id) }).first['score'].to_i
+      ActiveRecord::Base.connection.execute(SCORE_QUERY % { player_id: ActiveRecord::Base.connection.quote(player_id) }).first['score'].to_i
     end
 
     def get_full_stats_for(player)
       place = get_players_for(player.group).index(player) + 1
 
-      stats         = execute(SCORE_QUERY.trim         % { player_id: quote(player.id) }).first
-      goals_against = execute(GOALS_AGAINST_QUERY.trim % { player_id: quote(player.id) }).first['goals_against'].to_i
-      buddy_ftw     = execute(BUDDY_QUERY.trim         % { player_id: quote(player.id), comp: '>' }).to_a
-      banana_budy   = execute(BUDDY_QUERY.trim         % { player_id: quote(player.id), comp: '<' }).to_a
-      little_spoon  = execute(SPOON_QUERY.trim         % { player_id: quote(player.id), comp: '>' }).to_a
-      big_spoon     = execute(SPOON_QUERY.trim         % { player_id: quote(player.id), comp: '<' }).to_a
+      stats         = execute(SCORE_QUERY         % { player_id: quote(player.id) }).first
+      goals_against = execute(GOALS_AGAINST_QUERY % { player_id: quote(player.id) }).first['goals_against'].to_i
+      buddy_ftw     = execute(BUDDY_QUERY         % { player_id: quote(player.id), comp: '>' }).to_a
+      banana_budy   = execute(BUDDY_QUERY         % { player_id: quote(player.id), comp: '<' }).to_a
+      little_spoon  = execute(SPOON_QUERY         % { player_id: quote(player.id), comp: '>' }).to_a
+      big_spoon     = execute(SPOON_QUERY         % { player_id: quote(player.id), comp: '<' }).to_a
 
       Stats.new(
           place,
