@@ -108,7 +108,8 @@ module PlayersService
     end
 
     def get_full_stats_for(player)
-      place = get_players_for(player.group).index(player) + 1
+      place = get_players_for(player.group).index(player)
+      place += 1 unless place.nil?
 
       stats         = execute(SCORE_QUERY         % { player_id: player.id }).first
       goals_against = execute(GOALS_AGAINST_QUERY % { player_id: player.id }).first['goals_against'].to_i

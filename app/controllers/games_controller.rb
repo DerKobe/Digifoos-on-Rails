@@ -10,7 +10,7 @@ class GamesController < ApplicationController
       @game.teams.create!
     rescue => e
       Rails.logger.error e
-      @game = GamesService.open_game_for @group
+      @game = GamesService.get_open_game_for @group
     end
 
     render 'open_game'

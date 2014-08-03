@@ -12,23 +12,29 @@
       = @player.name
 
 #player
-  .row
-    .col-md-12
-      %h1
-        - if @stats.place <= 3
-          = fa_stacked_icon 'trophy inverse', base: 'circle', class: "trophy position-#{@stats.place}"
+  - if @stats.place.nil?
+    .row
+      .col-md-12
+        .alert.alert-warning
+          #{@player.name} hasn't played any games, yet.
+  - else
+    .row
+      .col-md-12
+        %h1
+          - if @stats.place <= 3
+            = fa_stacked_icon 'trophy inverse', base: 'circle', class: "trophy position-#{@stats.place}"
 
-        = big_badge 'plain',   @player.name,         'Player'
-        %br
-        = big_badge 'info',    @stats.place,         'Place'
-        = big_badge 'warning', @stats.score,         'Score', "#{@stats.games_played} gp"
-        = big_badge 'success', @stats.games_won,     'Games', "#{@stats.games_won_percentage}%"
-        = big_badge 'danger',  @stats.games_lost,    'Games', "#{@stats.games_lost_percentage}%"
-        = big_badge 'success', @stats.goals_made,    'Goals', "Avg #{@stats.goals_made_average}"
-        = big_badge 'danger',  @stats.goals_against, 'Goals', "Avg #{@stats.goals_against_average}"
+          = big_badge 'plain',   @player.name,         'Player'
+          %br
+          = big_badge 'info',    @stats.place,         'Place'
+          = big_badge 'warning', @stats.score,         'Score', "#{@stats.games_played} gp"
+          = big_badge 'success', @stats.games_won,     'Games', "#{@stats.games_won_percentage}%"
+          = big_badge 'danger',  @stats.games_lost,    'Games', "#{@stats.games_lost_percentage}%"
+          = big_badge 'success', @stats.goals_made,    'Goals', "Avg #{@stats.goals_made_average}"
+          = big_badge 'danger',  @stats.goals_against, 'Goals', "Avg #{@stats.goals_against_average}"
 
-  .row
-    = render 'players/players_panel', title: 'Buddy FTW',    subtitle: 'Won Together',  color: :blue,   players: @stats.buddy_ftw
-    = render 'players/players_panel', title: 'Banana Buddy', subtitle: 'Lost Together', color: :yellow, players: @stats.banana_buddy
-    = render 'players/players_panel', title: 'Little Spoon', subtitle: 'Won Against',   color: :green,  players: @stats.little_spoon
-    = render 'players/players_panel', title: 'Big Spoon',    subtitle: 'Lost Against',  color: :red,    players: @stats.big_spoon
+    .row
+      = render 'players/players_panel', title: 'Buddy FTW',    subtitle: 'Won Together',  color: :blue,   players: @stats.buddy_ftw
+      = render 'players/players_panel', title: 'Banana Buddy', subtitle: 'Lost Together', color: :yellow, players: @stats.banana_buddy
+      = render 'players/players_panel', title: 'Little Spoon', subtitle: 'Won Against',   color: :green,  players: @stats.little_spoon
+      = render 'players/players_panel', title: 'Big Spoon',    subtitle: 'Lost Against',  color: :red,    players: @stats.big_spoon

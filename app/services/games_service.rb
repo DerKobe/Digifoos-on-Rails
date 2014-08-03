@@ -1,7 +1,7 @@
 module GamesService
   class << self
 
-    def open_game_for(group)
+    def get_open_game_for(group)
       Game.where('group_id = ? AND games.status IN (?,?)', group.id, Game.statuses[:created], Game.statuses[:running]).first unless group.nil?
     end
 
@@ -26,8 +26,8 @@ module GamesService
 
     private
 
-    def elo(ra, rb, team_won, f = 150.0)
-      (15 * ( (team_won ? 1.0 : 0.0) - ( 1.0 / ( 1.0 + (10 ** ((rb - ra) / f )))))).to_i
+    def elo(ra, rb, player_won, f = 150.0)
+      (15 * ( (player_won ? 1.0 : 0.0) - ( 1.0 / ( 1.0 + (10 ** ((rb - ra) / f )))))).to_i
     end
 
     def score(team)
