@@ -66,4 +66,3 @@ gem 'awesome_print'
 gem 'newrelic_rpm', group: :development
 gem 'rack-timeout'
 gem 'nprogress-rails'
-gem 'appsignal', group: :production
